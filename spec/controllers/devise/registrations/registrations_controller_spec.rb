@@ -1,5 +1,5 @@
 require 'support/devise'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 describe Devise::RegistrationsController, type: :controller do
   before do

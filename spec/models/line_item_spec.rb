@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 RSpec.describe LineItem, type: :model do
   let(:line_item) { build :line_item }

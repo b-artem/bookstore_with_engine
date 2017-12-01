@@ -1,6 +1,6 @@
 require 'rails_helper'
 require 'support/devise'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 RSpec.describe LineItemsController, type: :controller do
   let(:cart) { create :cart }

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :book do
     sequence :title { |n| "Title #{n}" }
     sequence :description { |n| "Description of Book #{n}. " * 35 }

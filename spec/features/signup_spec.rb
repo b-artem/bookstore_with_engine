@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/i18n'
 
 feature 'Signup' do

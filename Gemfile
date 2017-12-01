@@ -33,7 +33,8 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'wicked', '~> 1.3', '>= 1.3.2'
 
 group :development, :test do
-  gem 'factory_girl_rails', '~> 4.8'
+  # gem 'factory_girl_rails', '~> 4.8'
+  gem 'factory_bot_rails', '~> 4.8', '>= 4.8.2'
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'seed_dump', '~> 3.2', '>= 3.2.4'

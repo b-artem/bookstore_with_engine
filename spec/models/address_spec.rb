@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 RSpec.describe Address, type: :model do
   let(:address) { build :address }

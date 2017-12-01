@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 RSpec.describe Forms::AddressForm, type: :model do
   let(:address_form) { build :address_form }
