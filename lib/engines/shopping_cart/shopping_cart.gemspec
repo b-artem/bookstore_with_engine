@@ -5,7 +5,7 @@ require "shopping_cart/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "shopping-cart"
+  s.name        = "shopping_cart"
   s.version     = ShoppingCart::VERSION
   s.authors     = ["b-artem"]
   s.email       = ["artem@example.com"]
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise', '~> 4.3'
   s.add_dependency 'draper', '~> 3.0', '>= 3.0.1'
   s.add_dependency 'haml-rails', '~> 1.0'
-  s.add_dependency 'rails', '~> 5.1.4'
+  s.add_dependency 'rails', '~> 5.1'
   s.add_dependency 'rectify', '~> 0.10.0'
   s.add_dependency 'sass-rails', '~> 5.0'
   s.add_dependency 'simple_form', '~> 3.5'
@@ -41,5 +41,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails', '~> 3.7', '>= 3.7.1'
   s.add_development_dependency 'selenium-webdriver', '~> 3.7'
   s.add_development_dependency 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.3', '>= 1.3.13'
 end

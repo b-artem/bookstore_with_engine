@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :shopping_cart_forms_address_form, class: ShoppingCart::Forms::AddressForm do
+  factory :shopping_cart_forms_address_form, class: 'ShoppingCart::Forms::AddressForm' do
     type { %w(ShoppingCart::BillingAddress ShoppingCart::ShippingAddress).sample }
     first_name { Faker::Name.first_name.tr("' ", '') }
     last_name { Faker::Name.last_name.tr("' ", '') }

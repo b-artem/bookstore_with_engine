@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    shopping-cart (0.1.0)
+    shopping_cart (0.1.0)
       aasm (~> 4.12, >= 4.12.3)
       cancancan (~> 2.1, >= 2.1.1)
       coffee-rails (~> 4.2, >= 4.2.2)
@@ -9,7 +9,7 @@ PATH
       devise (~> 4.3)
       draper (~> 3.0, >= 3.0.1)
       haml-rails (~> 1.0)
-      rails (~> 5.1.4)
+      rails (~> 5.1)
       rectify (~> 0.10.0)
       sass-rails (~> 5.0)
       simple_form (~> 3.5)
@@ -310,9 +310,9 @@ DEPENDENCIES
   rack_session_access (~> 0.1.1)
   rspec-rails (~> 3.7, >= 3.7.1)
   selenium-webdriver (~> 3.7)
-  shopping-cart!
+  shopping_cart!
   shoulda-matchers (~> 3.1, >= 3.1.2)
-  sqlite3
+  sqlite3 (~> 1.3, >= 1.3.13)
 
 BUNDLED WITH
    1.16.0

@@ -22,6 +22,12 @@ include ShoppingCart::Concerns::Controllers::ApplicationController
 include ShoppingCart::Concerns::Models::User
 ```
 
+5. Run the following command to copy engine migrations to your app:
+```ruby
+bin/rails shopping_cart:install:migrations
+```
+Don't forget to run migrations after that.
+
 5. Engine expects your application to call flash[:notice] and flash[:alert] as appropriate
 to show notifications. For example, in your application layout:
 ```ruby
