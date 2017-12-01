@@ -1,0 +1,9 @@
+%p.in-gold-500.font-18.mb-25= t 'settings.edit.email'
+= simple_form_for user,
+        url: { action: 'update_email' }, method: :patch,
+        class: 'general-form-md',
+        defaults: { label_html: { class: 'control-label input-label' } } do |f|
+  = f.input :email, label: t('settings.edit.enter_email'),
+            placeholder: t('settings.edit.enter_email')
+  %br
+  = f.button :submit, t('settings.edit.save'), class: 'btn btn-default mb-35'

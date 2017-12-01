@@ -1,0 +1,33 @@
+.text-center
+  %h3.general-login-title= t('.sign_in')
+  = link_to user_facebook_omniauth_authorize_path, class: 'general-login-icon' do
+    %i.fa.fa-facebook-official
+  %p.general-login-text= t '.or'
+
+= form_for(resource, as: resource_name, url: session_path(resource_name),
+            html: { class: "general-form" }) do |f|
+  .form-group.mb-30
+    = f.label :email, t('devise.enter_email'), class: "control-label input-label"
+    = f.email_field :email, class: "form-control", id: "email", autofocus: "true",
+                    placeholder: t('devise.enter_email')
+
+  .form-group.mb-30
+    = f.label :password, t('devise.password'), class: "control-label input-label"
+    = f.password_field :password, id: "password", class: "form-control",
+                        placeholder: t('devise.password')
+    = render "devise/shared/forgot_password"
+
+  - if devise_mapping.rememberable?
+    .form-group.checkbox.text-center.mb-30
+      %label.checkbox-label
+        = f.check_box :remember_me, class: "checkbox-input", hidden: "true"
+        %span.checkbox-icon
+          %i.fa.fa-check
+        %span.checkbox-text= t '.remember_me'
+
+  .text-center
+    = f.submit t('.sign_in'), class: "btn btn-default mb-20"
+
+%p.general-sign-text.text-center
+  = t '.dont_have_an_account'
+  = render "devise/shared/links"

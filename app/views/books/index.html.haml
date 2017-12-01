@@ -1,0 +1,34 @@
+%h1.general-title-margin= t '.catalog'
+.hidden-xs.clearfix
+  .dropdowns.pull-right
+    .dropdown.width-240
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        %span#text= t '.newest_first'
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul#sort-by.dropdown-menu
+        = render 'sort_by'
+  %ul.list-inline.pt-10.mb-25.mr-240
+    = render 'categories_filter'
+.dropdowns.mb-25.visible-xs
+  %p.lead.small.mb-10= t 'books.categories.filter_by_category'
+  .dropdown
+    %a.dropdown-toggle.lead.small{href: "", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      = t '.newest_first'
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu
+      = render 'sort_by'
+  %p.lead.small.mb-10= t '.sort_by'
+  .dropdown
+    %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      %span#text-xs= t '.newest_first'
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul#sort-by-xs.dropdown-menu
+      = render 'sort_by'
+.mb-120
+  #books.row
+    = render @books
+
+  .text-center
+    - unless @books.page(params[:page] || 1).last_page?
+      = link_to t('.view_more'), path_to_next_page(@books), method: :get,
+                remote: true, id: 'view-more', class: 'btn btn-primary'

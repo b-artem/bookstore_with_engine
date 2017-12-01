@@ -1,0 +1,68 @@
+= link_to back_path,
+          class: 'general-back-link' do
+  %i.fa.fa-long-arrow-left.mr-15
+  = t '.back_to_results'
+.row{id: "book-#{@book.id}"}
+  .col-sm-6
+    .product-gallery
+      = render partial: 'images', object: @book.images
+  .col-sm-6
+    %h1.mt-res-0
+      = @book.title
+    %p.lead.small
+      = book.authors_names
+    .row
+      .col-xs-12.col-md-4
+        %p.h1.in-gold-500.mt-10
+          = @book.decorate.price
+      .col-xs-5.col-md-3
+        .input-group.general-position
+          = form_tag line_items_path(book_id: @book.id), id: 'line-item-form' do
+            = link_to ' ', class: 'input-link quantity-input-minus' do
+              %i.fa.fa-minus.line-height-40
+            %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}
+            = link_to ' ', class: 'input-link quantity-input-plus' do
+              %i.fa.fa-plus.line-height-40
+      .col-xs-7.col-md-5
+        %button.btn.btn-default.pull-right.general-position{type: 'submit', form: 'line-item-form'}
+          = t '.add_to_cart'
+    .general-info-wrap.divider-lg
+      %p= t '.description'
+      %p.lead.small.line-height-2
+        = book.short_description
+        - if @book.description.length > 500
+          = hidden_field_tag(:full_description, book.full_description)
+          = link_to t('.read_more'), '#', id: 'read-more',
+                    class: 'in-gold-500 ml-10'
+    .general-info-wrap.divider-lg
+      .clearfix
+        %p.pull-left= t '.publication_year'
+        %p.lead.small.pull-right= @book.publication_year
+    .general-info-wrap.divider-lg
+      .clearfix
+        %p.pull-left= t '.dimensions'
+        %p.lead.small.pull-right= @book.dimensions
+    .general-info-wrap.divider-lg
+      .clearfix
+        %p.pull-left= t '.materials'
+        %p.lead.small.pull-right= @book.materials
+.mb-80
+  %h3.in-gold-500.mb-25= "#{t '.reviews'} (#{@book.reviews.approved.count})"
+  - if @book.reviews.approved.exists?
+    = render @book.reviews.approved.order('created_at DESC')
+
+  - if user_signed_in?
+    = t '.write_a_review'
+    %br
+    %br
+    = simple_form_for [@book, @book.reviews.build], class: 'res-mb-100',
+      defaults: { label_html: { class: 'control-label input-label' } } do |f|
+      = f.label :score
+      #star-rating
+      %br
+      = f.input :title, label: t('.review_title')
+      = f.input :text, label: t('.review_text')
+      = f.button :submit, t('.post_review'), class: 'btn'
+
+  - else
+    = t '.sign_in_to_write_a_review'

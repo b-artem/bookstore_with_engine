@@ -1,0 +1,32 @@
+= render 'steps'
+
+.text-center.mb-40
+  %h3.general-subtitle= t '.thank_you_for_your_order'
+  %p.fw-300= "#{t('.order_confirmation_has_been_sent')} #{current_user.email}"
+.row.mb-20
+  .col-sm-6
+    .visible-xs
+      %p.general-order-number.mb-0= "#{t('.order')} ##{@current_order.number}"
+      %p.general-address.mb-30= @current_order.decorate.completed_at_short_date
+    %p.general-address
+      = @current_order.shipping_address.decorate.full_name
+      %br
+      = @current_order.shipping_address.address
+      %br
+      = @current_order.shipping_address.decorate.city_zip
+      %br
+      = @current_order.shipping_address.decorate.country
+      %br
+      = @current_order.shipping_address.decorate.phone
+  .col-sm-6.hidden-xs.text-right
+    %p.general-order-number.mb-0= "#{t('.order')} ##{@current_order.number}"
+    %p.general-address.mb-30= @current_order.decorate.completed_at_long_date
+
+= render partial: 'line_items', object: @current_order.line_items
+
+.text-center.general-text-right
+  = render 'order_summary'
+
+.text-center
+  = button_to t('.back_to_store'), books_path, method: :get,
+              class: 'btn btn-default mb-20'

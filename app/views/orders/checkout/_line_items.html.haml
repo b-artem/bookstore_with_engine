@@ -1,0 +1,54 @@
+.visible-xs
+  .general-cart-item.divider-lg
+    - line_items.each do |line_item|
+      .general-img-wrap-table
+        = image_tag line_item.book.images[0].image_url.thumb.file.url,
+                    alt: "design-book"
+      %p.title= line_item.book.title
+      %P.in-grey-600.fw-300= line_item.book.decorate.short_description(200)
+      %table.table
+        %tr
+          %td
+            %span.in-grey-600= t '.price'
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.price
+        %tr
+          %td.vertical-middle
+            %span.in-grey-600= t '.quantity'
+          %td
+            %span= line_item.quantity
+        %tr
+          %td
+            %span.in-grey-600=t '.sub_total'
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.subtotal
+
+.hidden-xs.divider-lg.pt-20
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600= t '.book'
+        %th.col-method
+        %th
+          %span.in-grey-600= t '.price'
+        %th
+          %span.in-grey-600= t '.quantity'
+        %th
+          %span.in-grey-600= t '.total'
+    %tbody
+      - line_items.each do |line_item|
+        %tr
+          %td
+            .general-img-wrap-table
+              = image_tag line_item.book.images[0].image_url.thumb.file.url,
+                          class: 'cart-img-shadow pull-left', alt: "design-book"
+          %td
+            %p.title= line_item.book.title
+            %p.in-grey-600.fw-300= line_item.book.decorate.short_description(200)
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.price
+          %td
+            %span.ml-30= line_item.quantity
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.subtotal

@@ -1,0 +1,8 @@
+var input = "#input-line-item-<%= params[:id] %>";
+$(input).val(<%= @line_item.quantity %>);
+$("#subtotal-<%= params[:id] %>").text("<%= @line_item.decorate.subtotal %>");
+$("#cart-subtotal").text("<%= @line_item.cart.decorate.subtotal %>");
+$("#coupon").text("<%= @line_item.cart.decorate.discount %>");
+$("#cart-total").text("<%= @line_item.cart.decorate.total %>");
+$("span#cart").html("<%= @line_item.cart.products_quantity %>");
+$("span#cart-xs").html("<%= @line_item.cart.products_quantity %>");

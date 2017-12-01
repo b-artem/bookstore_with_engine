@@ -1,0 +1,49 @@
+= render 'steps'
+
+.row.mb-20
+  #shipping-address.col-sm-3
+    %h3.general-subtitle
+      = t 'orders.checkout.address.shipping_address'
+      = link_to wizard_path(:address, next_step: 'confirm') do
+        %span.general-edit= t('.edit')
+    = render partial: 'address', object: @current_order.shipping_address
+
+  #billing-address.col-sm-3
+    %h3.general-subtitle
+      = t 'orders.checkout.address.billing_address'
+      = link_to wizard_path(:address, next_step: 'confirm') do
+        %span.general-edit= t('.edit')
+    = render partial: 'address', object: @current_order.billing_address
+
+  #shipment.col-sm-3
+    %h3.general-subtitle
+      = t '.shipments'
+      = link_to wizard_path(:delivery, next_step: 'confirm') do
+        %span.general-edit= t('.edit')
+    %p.general-address
+      = @current_order.shipping_method.name
+      %br
+      = @current_order.shipping_method.decorate.terms
+      %br
+      = @current_order.shipping_method.decorate.price
+
+      %br
+
+  #payment.col-sm-3
+    %h3.general-subtitle
+      = t '.payment_information'
+      = link_to wizard_path(:payment) do
+        %span.general-edit= t('.edit')
+    %p.general-address
+      = '**** **** **** ' + @payment.card_number[-4,4]
+      %br
+      = @payment.valid_until.dup.insert(3,'20')
+
+= render partial: 'line_items', object: @current_order.line_items
+
+.text-center.general-text-right
+  = render 'order_summary'
+
+.text-center
+  = button_to t('.place_order'), wizard_path(:confirm), method: :patch,
+    class: 'btn btn-default mb-20'

@@ -1,0 +1,15 @@
+.general-message-wrap.divider-lg
+  .clearfix
+    %span.img.img-circle.logo-size.inlide-block.pull-left.logo-empty
+      = review.user.email.first
+    .ml-70
+      %div
+        .general-message-date.hidden-xs= review.decorate.date
+        .max-240
+          .general-message-verified= t('.verified_reviewer')
+          .general-message-name= "#{review.user.email.split('@').first}"
+      .mb-15
+      - if review.score
+        - review.score.times do
+          %i.fa.fa-star.rate-star
+      %p= review.text

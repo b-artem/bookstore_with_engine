@@ -1,0 +1,6 @@
+$("#books.row").append("<%= escape_javascript(render(@books)) %>");
+if ( "<%= j(Book.page(params[:page]).last_page?.to_s) %>" == 'true' ) {
+  $('#view-more').toggle(false);
+} else {
+  $('#view-more').toggle(true);
+}

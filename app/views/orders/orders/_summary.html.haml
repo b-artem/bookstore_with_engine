@@ -1,0 +1,25 @@
+%table.general-summary-table.general-summary-table-right.general-text-right
+  %tr
+    %td{colspan: 2}
+      %p.in-gold-500.font-18= t 'orders.order_summary.order_summary'
+  %tr
+    %td
+      %p.font-16= t 'orders.checkout.subtotal'
+    %td
+      %p.font-16= @order.decorate.subtotal
+  %tr
+    %td
+      %p.font-16= t 'orders.checkout.coupon'
+    %td
+      %p.font-16= @order.decorate.discount
+  -if @order.shipping_method
+    %tr
+      %td
+        %p.font-16= t '.shipping'
+      %td
+        %p.font-16= @order.shipping_method.decorate.price
+  %tr
+    %td
+      %strong.font-18= t 'orders.checkout.order_total'
+    %td
+      %strong.font-18= @order.decorate.total

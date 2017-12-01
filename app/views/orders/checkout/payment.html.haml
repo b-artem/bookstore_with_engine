@@ -1,0 +1,21 @@
+= render 'steps'
+
+%h3.general-subtitle= t '.credit_card'
+
+= simple_form_for @payment, url: wizard_path, method: :put, class: 'max-600 mb-80',
+        defaults: { label_html: { class: 'control-label input-label' } } do |f|
+  = f.input :card_number, as: :integer
+  .row
+    .col-sm-6
+      = f.input :name_on_card
+    .col-sm-3
+      = f.input :valid_until
+    .col-sm-3
+      = f.input :cvv, as: :integer,
+                wrapper_html: { class: 'form-group relative' }
+
+  .general-text-align
+    = render 'order_summary', locals: { step: step }
+
+  = f.button :submit, t('orders.checkout.save_and_continue'),
+              class: 'btn center-block mb-20'

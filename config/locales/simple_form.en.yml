@@ -1,0 +1,68 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      defaults:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        address: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        country: 'Country'
+        phone: 'Phone'
+        name_on_card: 'Name on Card'
+        credit_card: 'Credit Card'
+        card_number: 'Card Number'
+        valid_until: 'MM/YY'
+        cvv: 'CVV'
+      user:
+        password: 'Type a new Password'
+        password_confirmation: 'Confirm Password'
+    placeholders:
+      defaults:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        address: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        phone: 'Example +355 66 123 4567'
+        name_on_card: 'Name on Card'
+        credit_card: 'Credit Card'
+        card_number: 'Card Number'
+        valid_until: 'MM/YY'
+      user:
+        password: 'Type a new Password'
+        password_confirmation: 'Confirm Password'
+    prompts:
+      defaults:
+        country: 'Select a country'
+
+
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

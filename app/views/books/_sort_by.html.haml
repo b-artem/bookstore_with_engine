@@ -1,0 +1,12 @@
+%li= link_to t('.newest_first'),
+      request.query_parameters.merge({sort_by: 'created_at', sort_direction: 'DESC'})
+%li= link_to t('.popular_first'),
+      request.query_parameters.merge({sort_by: 'popularity', sort_direction: 'DESC'})
+%li= link_to t('.price_low_to_high'),
+      request.query_parameters.merge({sort_by: 'price', sort_direction: 'ASC'})
+%li= link_to t('.price_high_to_low'),
+      request.query_parameters.merge({sort_by: 'price', sort_direction: 'DESC'})
+%li= link_to t('.title_a_z'),
+      request.query_parameters.merge({sort_by: 'title', sort_direction: 'ASC'})
+%li= link_to t('.title_z_a'),
+      request.query_parameters.merge({sort_by: 'title', sort_direction: 'DESC'})

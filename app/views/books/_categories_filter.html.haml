@@ -1,0 +1,12 @@
+%li.mr-35
+  = link_to request.query_parameters.merge({category: 'all'}),
+            class: 'filter-link' do
+    = t 'books.categories.all'
+    %span.badge.general-badge= Book.count
+- @categories.each do |category|
+  %li.mr-35
+    = link_to request.query_parameters.merge({category: category.name}),
+              class: 'filter-link' do
+      = t("books.categories.#{category.name.downcase.tr(' ', '_')}")
+      %span.badge.general-badge
+        = category.books.count

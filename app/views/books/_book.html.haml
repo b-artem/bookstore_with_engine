@@ -1,0 +1,18 @@
+.col-xs-6.col-sm-3
+  .general-thumb-wrap
+    .thumbnail.general-thumbnail
+      = image_tag book.images[0].image_url.file.url,
+                  class: 'img-shadow general-thumbnail-img', alt: "design-book"
+      .thumb-hover
+        .general-thumb-link-wrap
+          = link_to book_path(book), class: 'thumb-hover-link' do
+            %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+          = link_to line_items_path(book_id: book.id, quantity: 1), method: :post,
+                    class: 'thumb-hover-link' do
+            %i.fa.fa-shopping-cart.thumb-icon
+  .general-thumb-info
+    %p.title= book.title
+    %p.font-16.in-gold-500= book.decorate.price
+    %span.divider-sm
+    -# Decorator somehow ruins layout
+    %p.lead.small= book.decorate.authors_names

@@ -1,0 +1,17 @@
+.text-center
+  %h1.mb-30= t '.forgot_password'
+  %p.general-password-text= t '.we_will_email_instructions'
+
+= simple_form_for resource, as: resource_name, url: password_path(resource_name),
+    html: { method: :post, class: "general-form" },
+    defaults: { label_html: { class: 'control-label input-label' } } do |f|
+
+  .form-group.mb-25
+    = f.input :email, label: false, placeholder: t('.enter_email'),
+              autofocus: true
+  = f.button :submit, t('.email_instructions'),
+              class: "btn btn-default center-block mb-20"
+
+  .text-center
+    %a.in-gold-500.mb-20{href: "#"}= t '.cancel'
+    = render "devise/shared/links"

@@ -1,0 +1,16 @@
+= simple_form_for address,
+        url: settings_update_path, method: :put,
+        class: 'res-mb-100',
+        defaults: { label_html: { class: 'control-label input-label' } } do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :address
+  = f.input :city
+  = f.input :zip
+  = f.input :country
+  = f.input :phone
+
+  .text-center.general-text-align
+  %br
+  = f.button :submit, t('settings.edit.save'),
+              class: 'btn'

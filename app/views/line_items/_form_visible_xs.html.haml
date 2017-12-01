@@ -1,0 +1,35 @@
+.general-cart-item.divider-lg-bottom{id: "line-item-#{line_item.id}-xs"}
+  %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+    %span{'aria-hidden': "true"} &times;
+  .general-img-wrap-table
+    = link_to book_path(line_item.book), id: "photo-view-#{line_item.book.id}-xs" do
+      = image_tag line_item.book.images[0].image_url.file.url,
+                  class: 'cart-img-shadow', alt: "design-book"
+  = link_to book_path(line_item.book), id: "title-view-#{line_item.book.id}-xs" do
+    %p.title.in-gold-500= line_item.book.title
+  %table.table
+    %tr
+      %td
+        %span.in-grey-600= t '.price'
+      %td
+        %span.font-16.in-gold-500= line_item.decorate.price
+    %tr
+      %td.vertical-middle
+        %span.in-grey-600= t '.quantity'
+      %td
+        .input-group
+          = form_for line_item, id: "form-line-item-#{line_item.id}-xs", remote: true do |f|
+            = link_to '#', id: "minus-#{line_item.id}-xs",
+                           class: 'input-link quantity-input-minus' do
+              %i.fa.fa-minus.line-height-40 &nbsp
+            = f.text_field :quantity, id: "input-line-item-#{line_item.id}-xs",
+                            class: 'form-control quantity-input'
+            = link_to '#', id: "plus-#{line_item.id}-xs",
+                           class: 'input-link quantity-input-plus' do
+              %i.fa.fa-plus.line-height-40 &nbsp
+            = f.submit '#', id: "update-line-item-#{line_item.id}-xs", hidden: true
+    %tr
+      %td
+        %span.in-grey-600= t '.sub_total'
+      %td
+        %span.font-16.in-gold-500= line_item.decorate.subtotal

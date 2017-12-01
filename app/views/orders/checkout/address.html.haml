@@ -1,0 +1,58 @@
+= render 'steps'
+
+= simple_form_for @order, url: wizard_path, method: :patch, class: 'res-mb-100',
+        defaults: { label_html: { class: 'control-label input-label' } } do |order|
+  .hidden-xs.hidden-sm
+    .row
+      .col-md-5
+        %h3.general-subtitle= t '.billing_address'
+        %p.general-info-text= t '.all_fields_are_required'
+      .col-md-5.col-md-offset-1
+        %h3.general-subtitle= t '.shipping_address'
+  .row
+    .col-md-5.mb-40
+      .visible-xs.visible-sm
+        %h3.general-subtitle= t '.billing_address'
+        %p.general-info-text= t '.all_fields_are_required'
+      #billing-address-form
+        = order.simple_fields_for @order.billing_address do |b|
+          = b.input :first_name
+          = b.input :last_name
+          = b.input :address
+          = b.input :city
+          = b.input :zip
+          = b.input :country
+          = b.input :phone
+
+    .col-md-5.col-md-offset-1.mb-60
+      .visible-xs.visible-sm
+        %h3.general-subtitle= t '.shipping_address'
+      #shipping-address-form
+        = order.simple_fields_for @order.shipping_address do |s|
+          = s.input :first_name
+          = s.input :last_name
+          = s.input :address
+          = s.input :city
+          = s.input :zip
+          = s.input :country
+          = s.input :phone
+
+      - if params[:next_step] == 'confirm'
+        %input.form-control{name: "next_step", value: 'confirm', type: 'hidden' }
+
+      .form-group.checkbox
+        %label.checkbox-label
+          %input.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+                type: "hidden", hidden: "true", value: 'false'}
+          %input#use_billing_address.checkbox-input{name: 'order[use_billing_address_as_shipping]',
+                type: "checkbox", hidden: "true", value: 'true',
+                data: { checked: @order.use_billing_address_as_shipping.to_s } }
+          %span.checkbox-icon
+            %i.fa.fa-check
+          %span.checkbox-text= t 'orders.checkout.address.use_billing_address'
+
+  .general-text-align.mb-60
+    = render 'order_summary'
+
+    = order.button :submit, t('orders.checkout.save_and_continue'),
+                  class: 'btn center-block mb-20'

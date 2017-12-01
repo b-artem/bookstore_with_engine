@@ -1,0 +1,46 @@
+- if params[:tab] == 'privacy'
+  - address_li_class = ''
+  - privacy_li_class = ' active'
+  - address_tab_class = ''
+  - privacy_tab_class = ' fade in active'
+- else
+  - address_li_class = ' active'
+  - privacy_li_class = ''
+  - address_tab_class = ' active in'
+  - privacy_tab_class = ''
+
+%h1.general-title-margin= t '.settings'
+%ul#tablist.nav.clearfix.mb-20{role: "tablist"}
+  = content_tag(:li, class: "tab-item" + address_li_class, role: "presentation") do
+    %a.tab-link{href: "#address", 'aria-controls': "address", role: "tab",
+                'data-toggle': "tab"}= t '.address'
+  = content_tag(:li, class: "tab-item" + privacy_li_class, role: "presentation") do
+    %a.tab-link{href: "#privacy", 'aria-controls': "privacy", role: "tab",
+                'data-toggle': "tab"}= t '.privacy'
+.tab-content
+  = content_tag(:div, id: 'address', role: 'tabpanel',
+                class: "tab-pane general-main-wrap" + address_tab_class) do
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle.mt-0= t '.billing_address'
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle.mt-0= t '.shipping_address'
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0=t '.billing_address'
+        = render partial: 'address_form', object: @billing_address, as: :address
+      .col-md-5.col-md-offset-1.mb-25
+        .visible-xs.visible-sm
+          %h3.general-subtitle.mt-0= t '.shipping_address'
+        = render partial: 'address_form', object: @shipping_address, as: :address
+
+  = content_tag(:div, id: 'privacy', class: "tab-pane" + privacy_tab_class, role: 'tabpanel') do
+    .row.mb-60
+      .col-sm-5
+        = render partial: 'email_form', object: @user, as: :user
+      .col-sm-5.col-sm-offset-1
+        = render partial: 'password_form', object: @user, as: :user
+      .col-sm-12
+        = render partial: 'remove_account_form', object: @user, as: :user

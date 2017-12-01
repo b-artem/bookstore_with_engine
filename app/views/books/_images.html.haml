@@ -1,0 +1,10 @@
+.mb-20
+  - if images[0]
+    = image_tag images[0].image_url.file.url, class: 'img-responsive'
+  - else
+    %p= t '.no_images'
+.images.clearfix
+  - (1..3).each do |index|
+    - if images[index]
+      = link_to images[index].image_url.file.url, class: 'img-link' do
+        = image_tag images[index].image_url.file.url

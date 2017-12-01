@@ -1,0 +1,65 @@
+= render 'steps'
+
+%h3.general-subtitle= t '.shipping_method'
+
+= simple_form_for @order, url: wizard_path, method: :put do |f|
+  .visible-xs
+    - @shipping_methods.each do |shipping_method|
+      .general-cart-item.divider-lg-bottom.mb-30
+        %table#shipping-methods-xs.table
+          %tr
+            %td.col-half
+              %span.in-grey-600= t '.method'
+            %td.col-half
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  %input.radio-input{name: 'order[shipping_method_id]',
+                    value: "#{shipping_method.id}", type: "radio", hidden: "true"}
+                  %span.radio-icon
+                  %span.radio-text= shipping_method.name
+          %tr
+            %td
+              %span.in-grey-600= t '.days'
+            %td
+              %span.font-16.fw-300= shipping_method.decorate.terms
+          %tr
+            %td
+              %span.in-grey-600= t '.price'
+            %td
+              %span.font-16.in-gold-500= shipping_method.decorate.price
+
+  .hidden-xs.mb-res-50
+    %table#shipping-methods.table.table-hover
+      %thead
+        %tr
+          %th.col-method
+            %span.in-grey-600.ml-40= t '.method'
+          %th
+            %span.in-grey-600= t '.days'
+          %th
+            %span.in-grey-600= t '.price'
+      %tbody
+        - @shipping_methods.each do |shipping_method|
+          - checked = false
+          - checked = true if @order.shipping_method.id == shipping_method.id
+          %tr
+            %td
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  %input.radio-input{name: 'order[shipping_method_id]',
+                    value: shipping_method.id, type: "radio", hidden: "true",
+                    checked: checked}
+                  %span.radio-icon
+                  %span.radio-text= shipping_method.name
+            %td
+              %span= shipping_method.decorate.terms
+            %td
+              %span.font-16.in-gold-500= shipping_method.decorate.price
+
+  = render('order_summary')
+
+  - if params[:next_step] == 'confirm'
+    %input.form-control{name: "next_step", value: 'confirm', type: 'hidden' }
+
+  = f.button :submit, t('orders.checkout.save_and_continue'),
+              class: 'btn center-block mb-20'

@@ -1,0 +1,32 @@
+%tr{id: "line-item-#{line_item.id}"}
+  %td
+    .general-img-wrap-table
+      = link_to book_path(line_item.book), id: "photo-view-#{line_item.book.id}" do
+        = image_tag line_item.book.images[0].image_url.file.url,
+                    alt: "design-book", class: 'cart-img-shadow pull-left'
+  %td
+    = link_to book_path(line_item.book), class: 'mb-20', id: "title-view-#{line_item.book.id}" do
+      %p.title.in-gold-500= line_item.book.title
+  %td
+    %span.font-16.in-gold-500= line_item.decorate.price
+  %td
+    .input-group
+      = form_for line_item, id: "form-line-item-#{line_item.id}", remote: true do |f|
+        = link_to '#', id: "minus-#{line_item.id}",
+                       class: 'input-link quantity-input-minus' do
+          %i.fa.fa-minus.line-height-40 &nbsp
+        = f.text_field :quantity, id: "input-line-item-#{line_item.id}",
+                        class: 'form-control quantity-input'
+        = link_to '#', id: "plus-#{line_item.id}",
+                       class: 'input-link quantity-input-plus' do
+          %i.fa.fa-plus.line-height-40 &nbsp
+        = f.submit '#', id: "update-line-item-#{line_item.id}", hidden: true
+
+  %td
+    %span.font-16.in-gold-500{id: "subtotal-#{line_item.id}"}
+      = line_item.decorate.subtotal
+  %td
+    = button_to line_item_path(line_item), method: :delete, type: "button",
+                id: "delete-#{line_item.id}",
+                class: "close general-cart-close", 'aria-label': "Close" do
+      %span{'aria-hidden': "true"} &times;

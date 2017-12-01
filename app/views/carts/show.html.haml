@@ -1,0 +1,63 @@
+%h1.general-title-margin= t '.cart'
+
+.visible-xs
+  = render partial: 'line_items/form_visible_xs',
+                    collection: @cart.line_items, as: :line_item
+
+.hidden-xs
+  %table.table.table-hover
+    %tr.no-hover
+      %th.col-pic.pl-0
+        %span.in-grey-600= t '.product'
+      %th.col-title
+      %th.col-price
+        %span.in-grey-600= t '.price'
+      %th.col-quantity
+        %span.in-grey-600= t '.quantity'
+      %th.col-total
+        %span.in-grey-600= t '.sub_total'
+      %th.col-close
+    = render partial: 'line_items/form_hidden_xs',
+                      collection: @cart.line_items, as: :line_item
+
+.general-order-wrap
+  .row
+    .col-sm-4
+      .input-group.general-input-group
+        = simple_form_for @cart do |f|
+          = f.simple_fields_for Coupon.new do |coupon|
+            = coupon.input :code,
+              label: t('.enter_coupon'),
+              placeholder: t('.enter_coupon'),
+              input_html: { class: 'form-control mb-30' },
+              label_html: { class: 'input-label' }
+          %div
+            = f.button :submit, t('.update_cart'),
+                        class: 'btn btn-primary mr-5 mb-15 visible-xs-inline-block'
+            = f.button :submit, t('.update_cart'),
+                        class: 'button btn btn-primary mb-15 res-block'
+
+    .col-sm-8
+      .res-mr-200.text-center.general-text-right
+        %p.in-gold-500.font-18= t'.order_summary'
+        %table.general-summary-table.general-summary-table-right.general-text-right
+          %tr
+            %td
+              %p.font-16= t '.subtotal'
+            %td
+              %p.font-16{id: "cart-subtotal"}= @cart.decorate.subtotal
+          %tr
+            %td
+              %p.font-16= t '.coupon'
+            %td
+              %p.font-16{id: 'coupon'}= @cart.decorate.discount
+          %tr
+            %td
+              %strong.font-18= t '.order_total'
+            %td
+              %strong.font-18{id: "cart-total"}= @cart.decorate.total
+        = button_to t('.checkout'), orders_path, method: :post,
+                          class: 'btn btn-default mb-20 visible-xs-inline-block'
+
+= button_to t('.checkout'), orders_path, method: :post, id: 'checkout-btn',
+            class: 'btn btn-default mb-20 hidden-xs center-block'

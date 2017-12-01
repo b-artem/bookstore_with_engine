@@ -1,0 +1,27 @@
+#slider.carousel.slide{'data-ride': "carousel"}
+  %ol.carousel-indicators
+    %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+    %li{'data-target': "#slider", 'data-slide-to': "1"}
+    %li{'data-target': "#slider", 'data-slide-to': "2"}
+  .carousel-inner{role: "listbox"}
+    .item.active
+      = render partial: 'latest_book', object: @latest_books.first
+    - (1..@latest_books.count-1).each do |index|
+      .item
+        = render partial: 'latest_book', object: @latest_books[index]
+  %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+    %span.icon-prev{'aria-hidden': "true"}
+    %span.sr-only= t '.previous'
+  %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+    %span.icon-next{'aria-hidden': "true"}
+    %span.sr-only= t '.next'
+.container
+.jumbotron.text-center.mb-0
+  %h2.h1= t '.welcome'
+  .mb-res-50
+    %p= t '.about_us'
+  = button_to t('.get_started'), books_path, method: :get, class: 'btn btn-default'
+#bestsellers.mb-35
+  %h3= t '.best_sellers'
+  .row
+    = render partial: 'best_sellers'
