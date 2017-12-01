@@ -1,0 +1,13 @@
+.dropdowns.dropdown.general-order-dropdown
+  %a#filter-btn.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+    %span#text= t '.waiting_for_processing'
+    %i.fa.fa-angle-down.dropdown-icon.pull-right
+  %ul#state-filter.dropdown-menu
+    %li
+      = link_to t('.waiting_for_processing'), orders_path(state: 'in_queue')
+    %li
+      = link_to t('.in_delivery'), orders_path(state: 'in_delivery')
+    %li
+      = link_to t('.delivered'), orders_path(state: 'delivered')
+    %li
+      = link_to t('.canceled'), orders_path(state: 'canceled')

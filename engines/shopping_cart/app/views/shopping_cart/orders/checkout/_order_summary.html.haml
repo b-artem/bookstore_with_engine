@@ -1,0 +1,38 @@
+- if [:confirm, :complete].include? step
+  - table_class = ' general-summary-table-right general-text-right'
+- else
+  - table_class = ''
+= content_tag(:table, class: "general-summary-table" + table_class) do
+  %tr
+    %td{colspan: 2}
+      %p.in-gold-500.font-18= t '.order_summary'
+  %tr
+    %td
+      %p.font-16= t '.subtotal'
+    %td
+      %p.font-16= @current_order.decorate.subtotal
+  %tr
+    %td
+      %p.font-16= t '.coupon'
+    %td
+      %p.font-16= @current_order.decorate.discount
+  -if [:delivery, :payment, :confirm, :complete].include? step
+    %tr
+      %td
+        %p.font-16= t '.shipping'
+      %td
+        - if @current_order.shipping_method
+          %p.font-16= @current_order.shipping_method.decorate.price
+        - else
+          %p.font-16= @order.shipping_method.decorate.price
+  %tr
+    %td
+      - if step == :address
+        %p.font-16= t '.order_total'
+      - else
+        %strong.font-18= t '.order_total'
+    %td#total
+      - if step == :address
+        %p.font-16= @current_order.decorate.total
+      - else
+        %strong.font-18= @current_order.decorate.total

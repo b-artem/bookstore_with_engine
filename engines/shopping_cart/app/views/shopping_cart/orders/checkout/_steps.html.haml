@@ -1,0 +1,12 @@
+%h1.general-title-margin= t '.checkout'
+
+= content_tag(:ul, class: "steps list-inline") do
+  - step_number = wizard_steps.index(step) + 1
+  - passed_steps = wizard_steps.slice(0, step_number)
+  - wizard_steps.each_with_index do |each_step, index|
+    - class_str = passed_steps.include?(each_step) ? "step active" : "step"
+    = content_tag(:li, class: class_str) do
+      %span.step-number= index + 1
+      %span.step-text.hidden-xs= t('.' + each_step.to_s)
+      - unless index == 4
+        %li.step-divider

@@ -1,0 +1,53 @@
+.visible-xs
+  .general-cart-item.divider-lg
+    - line_items.each do |line_item|
+      .general-img-wrap-table
+        = image_tag line_item.product.cover_image, alt: "design-product"
+      %p.title= line_item.product.title
+      %P.in-grey-600.fw-300= line_item.product.short_description
+      %table.table
+        %tr
+          %td
+            %span.in-grey-600= t '.price'
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.price
+        %tr
+          %td.vertical-middle
+            %span.in-grey-600= t '.quantity'
+          %td
+            %span= line_item.quantity
+        %tr
+          %td
+            %span.in-grey-600=t '.sub_total'
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.subtotal
+
+.hidden-xs.divider-lg.pt-20
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          %span.in-grey-600= t '.product'
+        %th.col-method
+        %th
+          %span.in-grey-600= t '.price'
+        %th
+          %span.in-grey-600= t '.quantity'
+        %th
+          %span.in-grey-600= t '.total'
+    %tbody
+      - line_items.each do |line_item|
+        %tr
+          %td
+            .general-img-wrap-table
+              = image_tag line_item.product.cover_image,
+                          class: 'cart-img-shadow pull-left', alt: "design-product"
+          %td
+            %p.title= line_item.product.title
+            %p.in-grey-600.fw-300= line_item.product.short_description
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.price
+          %td
+            %span.ml-30= line_item.quantity
+          %td
+            %span.font-16.in-gold-500= line_item.decorate.subtotal
