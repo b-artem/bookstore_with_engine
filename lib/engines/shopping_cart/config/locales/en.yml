@@ -110,6 +110,8 @@ en:
         coupon_symbols: 'Only allows letters and numbers'
       payment:
         invalid_term: 'Invalid term'
+      product:
+        referenced_by_line_items: 'You can not delete this product because it is referenced by line items'
       forms:
         address_form:
           only_letters: 'Only allows letters'

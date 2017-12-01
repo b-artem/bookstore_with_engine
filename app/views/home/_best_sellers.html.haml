@@ -9,7 +9,7 @@
             = link_to book_path(bestseller), id: "book-view-#{bestseller.id}",
                       class: 'thumb-hover-link' do
               %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-            = link_to line_items_path(book_id: bestseller.id, quantity: 1),
+            = link_to shopping_cart.line_items_path(book_id: bestseller.id, quantity: 1),
                       id: "add-book-#{bestseller.id}-to-cart",
                       method: :post, class: 'thumb-hover-link' do
               %i.fa.fa-shopping-cart.thumb-icon

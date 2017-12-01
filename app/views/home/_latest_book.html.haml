@@ -10,5 +10,5 @@
       %p.lead.small= latest_book.decorate.authors_names
       .general-align
         = button_to t('.buy_now'),
-                    line_items_path(book_id: latest_book.id, quantity: 1),
+                    shopping_cart.line_items_path(book_id: latest_book.id, quantity: 1),
                     class: 'btn btn-primary'

@@ -17,12 +17,17 @@ Product have to respond to #title, #price, #cover_image, and #short_description 
 ```ruby
 include ShoppingCart::Concerns::Controllers::ApplicationController
 ```
-4. Include the following line in your user model, e.g. `user.rb`:
+Include the following line in your user model, e.g. `user.rb`:
 ```ruby
 include ShoppingCart::Concerns::Models::User
 ```
 
-5. Run the following command to copy engine migrations to your app:
+Include the following line in your product model, e.g. `book.rb`:
+```ruby
+include ShoppingCart::Concerns::Models::Product
+```
+
+4. Run the following command to copy engine migrations to your app:
 ```ruby
 bin/rails shopping_cart:install:migrations
 ```

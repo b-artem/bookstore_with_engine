@@ -8,10 +8,10 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand= t '.bookstore'
-      = link_to @cart, class: 'shop-link pull-right visible-xs' do
+      = link_to shopping_cart.cart_path(@cart), class: 'shop-link pull-right visible-xs' do
         %span.shop-icon
           %span#cart-xs.shop-quantity= @cart.products_quantity
-    = link_to @cart, class: 'shop-link pull-right hidden-xs', id: 'cart' do
+    = link_to shopping_cart.cart_path(@cart), class: 'shop-link pull-right hidden-xs', id: 'cart' do
       %span.shop-icon
         %span#cart.shop-quantity= @cart.products_quantity
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
