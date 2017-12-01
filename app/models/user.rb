@@ -1,8 +1,9 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :confirmable, 
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   ROLES = %i[admin user].freeze
+  include ShoppingCart::Concerns::Models::User
 
   has_many :orders
   has_many :reviews

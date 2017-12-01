@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   patch 'settings/change_password'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount ShoppingCart::Engine => '/shopping_cart'
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 end
