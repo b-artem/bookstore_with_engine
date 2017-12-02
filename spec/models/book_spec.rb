@@ -12,7 +12,6 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_and_belong_to_many(:authors) }
     it { is_expected.to have_and_belong_to_many(:categories) }
     it { is_expected.to have_many(:reviews).dependent(:destroy) }
-    it { is_expected.to have_many(:line_items) }
   end
 
   describe "ActiveModel validations" do
@@ -39,11 +38,11 @@ RSpec.describe Book, type: :model do
     let(:bestseller_web_dev) { create :book_web_development }
 
     before do
-      create(:order, state: 'delivered', line_items: [
-              create(:line_item, book: bestseller_mob_dev),
-              create(:line_item, book: bestseller_photo),
-              create(:line_item, book: bestseller_web_design),
-              create(:line_item, book: bestseller_web_dev) ])
+      create(:shopping_cart_order, state: 'delivered', line_items: [
+              create(:shopping_cart_line_item, product: bestseller_mob_dev),
+              create(:shopping_cart_line_item, product: bestseller_photo),
+              create(:shopping_cart_line_item, product: bestseller_web_design),
+              create(:shopping_cart_line_item, product: bestseller_web_dev) ])
       create_list(:book_mobile_development, 3)
       create_list(:book_photo, 3)
       create_list(:book_web_design, 3)

@@ -12,18 +12,18 @@ shared_examples 'delete' do
   end
 
   context "user clicks 'x' button", js: true do
-    let!(:line_item) { create(:line_item, cart: Cart.last, book: book) }
-    background { visit cart_path(Cart.last) }
+    let!(:line_item) { create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book) }
+    background { visit shopping_cart.cart_path(ShoppingCart::Cart.last) }
 
     scenario 'removes product from Cart view' do
       click_button("delete-#{line_item.id}")
-      expect(page).not_to have_content(line_item.book.title)
-      expect(page).to have_content(I18n.t('line_items.destroy.success'))
+      expect(page).not_to have_content(line_item.product.title)
+      expect(page).to have_content(I18n.t('shopping_cart.line_items.destroy.success'))
     end
 
     scenario 'decrements number of products in Cart' do
       expect { click_button("delete-#{line_item.id}"); wait_for_ajax }
-                .to change { Cart.last.line_items.count }.by(-1)
+                .to change { ShoppingCart::Cart.last.line_items.count }.by(-1)
     end
   end
 end

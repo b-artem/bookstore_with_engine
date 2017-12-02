@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LineItemsController, type: :routing do
+RSpec.describe ShoppingCart::LineItemsController, type: :routing do
   describe "routing" do
     it "routes to #create" do
       expect(:post => "/line_items").to route_to("line_items#create")

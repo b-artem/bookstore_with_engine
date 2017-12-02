@@ -5,7 +5,7 @@ require 'support/i18n'
 require 'rack_session_access/capybara'
 
 feature 'Start checkout' do
-  let!(:cart) { create :cart, line_items: [create(:line_item, cart: Cart.last)] }
+  let!(:cart) { create :cart, line_items: [create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last)] }
   background do
     page.set_rack_session(cart_id: cart.id)
     allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
@@ -16,7 +16,7 @@ feature 'Start checkout' do
     context 'when user is logged in' do
       background do
         sign_in create(:user)
-        visit cart_path(cart)
+        visit shopping_cart.cart_path(cart)
         click_button 'checkout-btn'
       end
       scenario 'Checkout page opens, Addresses tab' do
@@ -28,7 +28,7 @@ feature 'Start checkout' do
 
     context 'when user is a guest' do
       background do
-        visit cart_path(cart)
+        visit shopping_cart.cart_path(cart)
         click_button 'checkout-btn'
       end
       scenario 'Login page opens' do

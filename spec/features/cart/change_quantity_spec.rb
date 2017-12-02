@@ -12,8 +12,8 @@ shared_examples 'changes quantity' do
   end
 
   context 'when product quantity = 1', js: true do
-    let(:line_item) { create(:line_item, cart: Cart.last, book: book) }
-    background { visit cart_path(line_item.cart) }
+    let(:line_item) { create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book) }
+    background { visit shopping_cart.cart_path(line_item.cart) }
 
     context "user clicks '+' button" do
       # wait_for_ajax does NOT help there
@@ -28,7 +28,7 @@ shared_examples 'changes quantity' do
 
       scenario 'increments product quantity' do
         within "#line-item-#{line_item.id}" do
-          expect { subject }.to change { LineItem.last.quantity }.by(1)
+          expect { subject }.to change { ShoppingCart::LineItem.last.quantity }.by(1)
         end
       end
     end
@@ -46,7 +46,7 @@ shared_examples 'changes quantity' do
 
       scenario 'does NOT decrement product quantity' do
         within "#line-item-#{line_item.id}" do
-          expect { subject }.not_to change { LineItem.last.quantity }
+          expect { subject }.not_to change { ShoppingCart::LineItem.last.quantity }
         end
       end
     end
@@ -54,9 +54,9 @@ shared_examples 'changes quantity' do
 
   context 'when product quantity = 2', js: true do
     let!(:line_item) do
-      create(:line_item, cart: Cart.last, book: book, quantity: 2)
+      create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book, quantity: 2)
     end
-    background { visit cart_path(Cart.last) }
+    background { visit shopping_cart.cart_path(ShoppingCart::Cart.last) }
 
     context "user clicks '-' button" do
       # wait_for_ajax does NOT help there
@@ -70,7 +70,7 @@ shared_examples 'changes quantity' do
       end
 
       scenario 'decrements product quantity' do
-        expect { subject }.to change { LineItem.last.quantity }.by(-1)
+        expect { subject }.to change { ShoppingCart::LineItem.last.quantity }.by(-1)
       end
     end
   end

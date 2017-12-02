@@ -34,7 +34,7 @@ feature 'Checkout Payment step' do
   let(:shipping_method) { create :shipping_method }
   let(:books) { build_list(:book, 2) }
   let(:line_items) do
-    [create(:line_item, book: books[0]), create(:line_item, book: books[1])]
+    [create(:shopping_cart_line_item, book: books[0]), create(:shopping_cart_line_item, book: books[1])]
   end
   let!(:order) do
     create(:order, user: user, line_items: line_items,

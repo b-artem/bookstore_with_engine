@@ -46,7 +46,7 @@ shared_examples 'latest books' do
         click_button(I18n.t('home.latest_book.buy_now'))
       end
       wait_for_ajax
-      expect(Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
+      expect(ShoppingCart::Cart.first.line_items.first.book).to eq Book.order('created_at DESC').first
     end
   end
 end

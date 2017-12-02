@@ -10,10 +10,10 @@ shared_examples 'best sellers' do
 
   background do
     create(:order, state: 'delivered', line_items: [
-            create(:line_item, book: bestseller_mob_dev),
-            create(:line_item, book: bestseller_photo),
-            create(:line_item, book: bestseller_web_design),
-            create(:line_item, book: bestseller_web_dev) ])
+            create(:shopping_cart_line_item, book: bestseller_mob_dev),
+            create(:shopping_cart_line_item, book: bestseller_photo),
+            create(:shopping_cart_line_item, book: bestseller_web_design),
+            create(:shopping_cart_line_item, book: bestseller_web_dev) ])
     create_list(:book_mobile_development, 3)
     create_list(:book_photo, 3)
     create_list(:book_web_design, 3)
@@ -49,7 +49,7 @@ shared_examples 'best sellers' do
         click_link("add-book-#{bestseller_photo.id}-to-cart")
       end
       wait_for_ajax
-      expect(Cart.last.line_items.first.book).to eq bestseller_photo
+      expect(ShoppingCart::Cart.last.line_items.first.book).to eq bestseller_photo
     end
   end
 end
