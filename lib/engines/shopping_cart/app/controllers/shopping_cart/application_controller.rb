@@ -12,7 +12,7 @@ module ShoppingCart
     end
 
     def current_ability
-      @current_ability ||= Ability.new(current_main_app_user, session)
+      @current_ability ||= ShoppingCart::Ability.new(current_main_app_user, session)
     end
   end
 end

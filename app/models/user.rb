@@ -5,10 +5,7 @@ class User < ApplicationRecord
   ROLES = %i[admin user].freeze
   include ShoppingCart::Concerns::Models::User
 
-  has_many :orders
   has_many :reviews
-  has_one :billing_address
-  has_one :shipping_address
 
   def self.from_omniauth(auth)
     where(omniauth_provider: auth.provider,

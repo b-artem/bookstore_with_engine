@@ -24,9 +24,17 @@ class Book < ApplicationRecord
 
   scope :popular_first_ids, -> do
     return Book.none unless ShoppingCart::LineItem.exists?
-    ShoppingCart::LineItem.select("line_items.product_id, sum(quantity) as total_quantity")
+    ShoppingCart::LineItem.select("shopping_cart_line_items.product_id, sum(quantity) as total_quantity")
       .joins(:product)
-      .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.product_id').order('total_quantity DESC').map(&:book_id)
+      .joins(:order).where(shopping_cart_orders: { state: 'delivered' })
+      .group('shopping_cart_line_items.product_id').order('total_quantity DESC').map(&:product_id)
+  end
+
+  def cover_image
+    images[0].image_url.file.url
+  end
+
+  def short_description
+    description.truncate(500)
   end
 end

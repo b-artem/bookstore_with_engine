@@ -29,13 +29,13 @@ class SettingsController < ApplicationController
 
   def update
     if params[:billing_address]
-      address = Forms::BillingAddressForm.from_params(params[:billing_address])
+      address = ShoppingCart::Forms::BillingAddressForm.from_params(params[:billing_address])
     elsif params[:shipping_address]
-      address = Forms::ShippingAddressForm.from_params(params[:shipping_address])
+      address = ShoppingCart::Forms::ShippingAddressForm.from_params(params[:shipping_address])
                 .with_context(use_billing_address_as_shipping: false)
     end
     if address.valid?
-      addr = Address.find_or_create_by(user_id: @user.id, type: address.type)
+      addr = ShoppingCart::Address.find_or_create_by(user_id: @user.id, type: address.type)
       addr.update_attributes(address.attributes)
       redirect_to settings_edit_path, notice: t('.success')
     else
@@ -64,18 +64,22 @@ class SettingsController < ApplicationController
 
     def set_addresses
       if params[:billing_address]
-        @billing_address = Forms::BillingAddressForm.from_params(params[:billing_address])
+        @billing_address = ShoppingCart::Forms::BillingAddressForm
+          .from_params(params[:billing_address])
         @billing_address.valid?
       else
-        @billing_address = Forms::BillingAddressForm.from_model(@user.billing_address)
+        @billing_address = ShoppingCart::Forms::BillingAddressForm
+          .from_model(@user.billing_address)
       end
 
       if params[:shipping_address]
-        @shipping_address = Forms::ShippingAddressForm.from_params(params[:shipping_address])
-                            .with_context(use_billing_address_as_shipping: false)
+        @shipping_address = ShoppingCart::Forms::ShippingAddressForm
+          .from_params(params[:shipping_address])
+          .with_context(use_billing_address_as_shipping: false)
         @shipping_address.valid?
       else
-        @shipping_address = Forms::ShippingAddressForm.from_model(@user.shipping_address)
+        @shipping_address = ShoppingCart::Forms::ShippingAddressForm
+          .from_model(@user.shipping_address)
       end
     end
 end
