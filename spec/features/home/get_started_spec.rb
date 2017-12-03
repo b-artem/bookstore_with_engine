@@ -8,8 +8,8 @@ shared_examples 'get started' do
     create :book_photo
     create :book_web_design
     create :book_web_development
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive(:cover_image)
+      .and_return('https://example.com/image.jpg')
     visit home_index_path
   end
 
@@ -30,7 +30,7 @@ feature 'Home page' do
     context 'when user is a guest' do
       it_behaves_like 'get started'
     end
-    
+
     context 'when user is logged in' do
       let(:user) { create(:user) }
       background { sign_in user }

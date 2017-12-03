@@ -6,13 +6,13 @@ require 'support/wait_for_ajax'
 
 shared_examples 'saves billing address' do
   background do
-    click_button t('orders.checkout.save_and_continue')
+    click_button t('shopping_cart.orders.checkout.save_and_continue')
     wait_for_ajax
   end
 
   scenario 'saves billing address from a form fields', js: true do
     address_fields.each do |field|
-      expect(Order.find(order.id).billing_address.public_send(field))
+      expect(ShoppingCart::Order.find(order.id).billing_address.public_send(field))
         .to eq billing_address.public_send(field)
     end
   end
@@ -20,13 +20,13 @@ end
 
 shared_examples 'saves shipping address' do
   background do
-    click_button t('orders.checkout.save_and_continue')
+    click_button t('shopping_cart.orders.checkout.save_and_continue')
     wait_for_ajax
   end
 
   scenario 'saves shipping address from a form fields', js: true do
     address_fields.each do |field|
-      expect(Order.find(order.id).shipping_address.public_send(field))
+      expect(ShoppingCart::Order.find(order.id).shipping_address.public_send(field))
         .to eq shipping_address.public_send(field)
     end
   end
@@ -34,13 +34,13 @@ end
 
 shared_examples 'uses billing address as shipping' do
   background do
-    click_button t('orders.checkout.save_and_continue')
+    click_button t('shopping_cart.orders.checkout.save_and_continue')
     wait_for_ajax
   end
 
   scenario 'uses Billing Address as Shipping Address', js: true do
     address_fields.each do |field|
-      expect(Order.find(order.id).shipping_address.public_send(field))
+      expect(ShoppingCart::Order.find(order.id).shipping_address.public_send(field))
         .to eq billing_address.public_send(field)
     end
   end
@@ -48,55 +48,55 @@ end
 
 shared_examples 'does not save addresses' do
   background do
-    click_button t('orders.checkout.save_and_continue')
+    click_button t('shopping_cart.orders.checkout.save_and_continue')
     wait_for_ajax
   end
 
   scenario 'does NOT save Addresses and renders form again', js: true do
-    expect(Order.find(order.id).billing_address).to be_nil
-    expect(Order.find(order.id).shipping_address).to be_nil
+    expect(ShoppingCart::Order.find(order.id).billing_address).to be_nil
+    expect(ShoppingCart::Order.find(order.id).shipping_address).to be_nil
   end
 end
 
 shared_examples 'proceeds to next step' do
   context 'when user clicks Save and Continue button' do
     background do
-      click_button t('orders.checkout.save_and_continue')
+      click_button t('shopping_cart.orders.checkout.save_and_continue')
       wait_for_ajax
     end
 
     scenario 'renders next step (Delivery)', js: true do
-      expect(page).to have_content(t('orders.checkout.delivery.shipping_method'))
-      expect(page).to have_content(t('orders.checkout.delivery.days'))
-      expect(page).to have_content(t('orders.checkout.delivery.price'))
+      expect(page).to have_content(t('shopping_cart.orders.checkout.delivery.shipping_method'))
+      expect(page).to have_content(t('shopping_cart.orders.checkout.delivery.days'))
+      expect(page).to have_content(t('shopping_cart.orders.checkout.delivery.price'))
     end
   end
 end
 
 shared_examples 'renders address form again' do
   background do
-    click_button t('orders.checkout.save_and_continue')
+    click_button t('shopping_cart.orders.checkout.save_and_continue')
     wait_for_ajax
   end
 
   scenario 'renders next step (Delivery)', js: true do
-    expect(page).to have_content(t('orders.checkout.address.billing_address'))
-    expect(page).to have_content(t('orders.checkout.address.shipping_address'))
-    expect(page).to have_content(t('orders.checkout.address.all_fields_are_required'))
+    expect(page).to have_content(t('shopping_cart.orders.checkout.address.billing_address'))
+    expect(page).to have_content(t('shopping_cart.orders.checkout.address.shipping_address'))
+    expect(page).to have_content(t('shopping_cart.orders.checkout.address.all_fields_are_required'))
   end
 end
 
 feature 'Checkout Address step' do
   let!(:user) { create :user }
-  let!(:order) { create :order, user: user }
+  let!(:order) { create :shopping_cart_order, user: user }
   let(:address_fields) { %w[first_name last_name address city zip country phone] }
-  let(:billing_address) { build :billing_address }
-  let(:shipping_address) { build :shipping_address }
+  let(:billing_address) { build :shopping_cart_billing_address }
+  let(:shipping_address) { build :shopping_cart_shipping_address }
   background do
     sign_in user
     page.set_rack_session(order_id: order.id)
-    create :shipping_method
-    visit order_checkout_index_path(order)
+    create :shopping_cart_shipping_method
+    visit shopping_cart.order_checkout_index_path(order)
   end
 
   context 'when all required fields are filled correctly' do

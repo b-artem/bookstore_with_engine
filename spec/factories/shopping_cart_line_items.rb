@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :shopping_cart_line_item, class: 'ShoppingCart::LineItem' do
-    product { build :product }
+    product { build :book }
     cart { build :shopping_cart_cart }
     price { product.price }
     quantity 1
