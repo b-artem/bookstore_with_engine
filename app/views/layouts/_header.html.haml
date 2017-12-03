@@ -21,24 +21,24 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to t('layouts.application.home'), root_path
+            = link_to t('layouts.application.home'), main_app.root_path
           %li
             %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t 'application.header.shop'
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               - @categories.each do |category|
                 %li= link_to t("books.categories.#{category.name.downcase.tr(' ', '_')}"),
-                            books_path(category: category.name),
+                            main_app.books_path(category: category.name),
                             class: 'collapse-link'
           = render 'layouts/account_menu'
 
       .hidden-xs
         %ul.nav.navbar-nav
-          %li= link_to t('layouts.application.home'), root_path
+          %li= link_to t('layouts.application.home'), main_app.root_path
           %li.dropdown
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button",    'aria-haspopup': "true", 'aria-expanded': "false"}
               = t 'layouts.application.shop'
             %ul.dropdown-menu
               - @categories.each do |category|
                 %li= link_to t("books.categories.#{category.name.downcase.tr(' ', '_')}"),
-                              books_path(category: category.name)
+                              main_app.books_path(category: category.name)
           = render 'layouts/account_menu'

@@ -19,10 +19,10 @@
         .input-group.general-position
           = form_tag shopping_cart.line_items_path(product_id: @book.id),
                      id: 'line-item-form' do
-            = link_to ' ', class: 'input-link quantity-input-minus' do
+            = link_to ' ', class: 'input-link book-quantity-input-minus' do
               %i.fa.fa-minus.line-height-40
             %input.form-control.quantity-input{name: 'quantity', type: "text", value: 1}
-            = link_to ' ', class: 'input-link quantity-input-plus' do
+            = link_to ' ', class: 'input-link book-quantity-input-plus' do
               %i.fa.fa-plus.line-height-40
       .col-xs-7.col-md-5
         %button.btn.btn-default.pull-right.general-position{type: 'submit', form: 'line-item-form'}

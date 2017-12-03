@@ -21,7 +21,6 @@ Include the following line in your user model, e.g. `user.rb`:
 ```ruby
 include ShoppingCart::Concerns::Models::User
 ```
-
 Include the following line in your product model, e.g. `book.rb`:
 ```ruby
 include ShoppingCart::Concerns::Models::Product
@@ -38,6 +37,11 @@ to show notifications. For example, in your application layout:
 ```ruby
 %p#notice= notice
 %p#alert= alert
+```
+
+6. Copy this line to the head section your layouts/application.html.haml:
+```ruby
+= yield :head
 ```
 
 ## Installation

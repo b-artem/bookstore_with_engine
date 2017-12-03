@@ -1,5 +1,5 @@
 $(document).on 'turbolinks:load', ->
-  $('.quantity-input-minus').click (event) ->
+  $('.book-quantity-input-minus').click (event) ->
     event.preventDefault()
     input = $(event.target).parent().siblings('.quantity-input')
     quantity = input.val()
