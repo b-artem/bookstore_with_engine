@@ -94,26 +94,26 @@ Author.find(13).books << Book.find(15)
 Author.find(14).books << Book.find(14)
 
 # IMAGES_PATH = File.expand_path('../books_for_bookstore/', Rails.root)
-Image.create!([
-  {book_id: 11, image_url: open('https://drive.google.com/file/d/174NHY6yKO0eMrQ3PdfE4GqPycGIluIFM/view')},
-  {book_id: 11, image_url: open('https://drive.google.com/open?id=1-2PBq8Qwi_2eTxHS5WFoshqTuthG8uk9')},
-  {book_id: 11, image_url: open('https://drive.google.com/open?id=1IUh8ZOgN7AVlCZiKUgxP2jp8p1x5HYYN')},
-  {book_id: 11, image_url: open('https://drive.google.com/open?id=1YtCgyOwPGWXpmT_zmyhz_7qSmugI_RSU')},
-  {book_id: 14, image_url: open('https://drive.google.com/open?id=14H8UyOioxMs4nmoyTO3dUfzWNW4oNKwO')},
-  {book_id: 15, image_url: open('https://drive.google.com/open?id=1IlBybOogkPjkOmR9-lVkDtjsno4LvbaU')},
-  {book_id: 13, image_url: open('https://drive.google.com/open?id=1BVducbfEGEeTtWlfDeYuwVPZSjLpuaUt')},
-  {book_id: 12, image_url: open('https://drive.google.com/open?id=1tu0hzQcTRlyxqKtB9W-NFUyxZsQPemun')},
-  {book_id: 10, image_url: open('https://drive.google.com/open?id=1xtjnWBh_K7T82OjHHUN_UKZFBUga58vc')},
-  {book_id: 9, image_url: open('https://drive.google.com/open?id=1YuXBinsbCUWKtwOt8FZTf3bXUZKHl8nr')},
-  {book_id: 7, image_url: open('https://drive.google.com/open?id=1kbzzjiUBBzY_fi2MAaiJVvCcYKGJ5AkM')},
-  {book_id: 6, image_url: open('https://drive.google.com/open?id=102kQPSPjg1WMM3cRpQk3H8gXdnHGwYjF')},
-  {book_id: 5, image_url: open('https://drive.google.com/open?id=1J4IxtPWCa3y1BxVwYJ10R8Q-Ez2nBEag')},
-  {book_id: 4, image_url: open('https://drive.google.com/open?id=13ywp6tD4nTO8ep7f_gJaxewNSHkbktfc')},
-  {book_id: 3, image_url: open('https://drive.google.com/open?id=14P6xeoqYZpwfTf5JW3Pc3lr6GryPpsL2')},
-  {book_id: 2, image_url: open('https://drive.google.com/open?id=1JRdFDz4A48EOc4ud8SvSW-wbR5ygQV2y')},
-  {book_id: 1, image_url: open('https://drive.google.com/open?id=1ceOid0DNjrdCraQHKPHZfh_y08JoraW_')},
-  {book_id: 8, image_url: open('https://drive.google.com/open?id=1LMTRace-LeK1J6s8Pdj0kOpbXt3khO_y')}
-])
+# Image.create!([
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile1.jpg")},
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile2.jpg")},
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile3.jpg")},
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile4.jpg")},
+#   {book_id: 14, image_url: open(IMAGES_PATH + "/Faded.jpg")},
+#   {book_id: 15, image_url: open(IMAGES_PATH + "/Photos_changed.jpg")},
+#   {book_id: 13, image_url: open(IMAGES_PATH + "/Photo_ark.jpg")},
+#   {book_id: 12, image_url: open(IMAGES_PATH + "/Rails_Angular.jpg")},
+#   {book_id: 10, image_url: open(IMAGES_PATH + "/html_css.jpg")},
+#   {book_id: 9, image_url: open(IMAGES_PATH + "/web_design_html.jpg")},
+#   {book_id: 7, image_url: open(IMAGES_PATH + "/Android_programming.jpg")},
+#   {book_id: 6, image_url: open(IMAGES_PATH + "/Building_ecom.jpg")},
+#   {book_id: 5, image_url: open(IMAGES_PATH + "/Learning_java.jpg")},
+#   {book_id: 4, image_url: open(IMAGES_PATH + "/Learning_mobile_app.jpg")},
+#   {book_id: 3, image_url: open(IMAGES_PATH + "/Xamarin.jpg")},
+#   {book_id: 2, image_url: open(IMAGES_PATH + "/Mobile_app_dev.jpg")},
+#   {book_id: 1, image_url: open(IMAGES_PATH + "/Hello_Android.jpg")},
+#   {book_id: 8, image_url: open(IMAGES_PATH + "/javascript_jquery.jpg")}
+# ])
 
 ShoppingCart::Order.create!([
   {number: "R00000001", completed_at: "2017-09-24 08:03:00", state: "delivered", user_id: 2, shipping_method_id: 3, use_billing_address_as_shipping: true, coupon_id: nil},
