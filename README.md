@@ -1,7 +1,7 @@
 # README
 
-## Bookstore task
+## Ebgine task - Bookstore with engine
 
-https://bookstore-artem.herokuapp.com/
+https://bookstore_with_engine.herokuapp.com/
 
 Valid coupon code: 12345678

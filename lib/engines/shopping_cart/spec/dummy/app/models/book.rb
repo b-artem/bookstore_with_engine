@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  include ShoppingCart::Concerns::Models::Product
+  
   def cover_image
     'https://example.com/image.jpg'
   end

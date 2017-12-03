@@ -8,7 +8,8 @@ module ShoppingCart
     background { visit main_app.root_path }
 
     context "user clicks 'x' button", js: true do
-      let!(:line_item) { create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: product) }
+      let!(:line_item) { create(:shopping_cart_line_item,
+                          cart: ShoppingCart::Cart.last, product: product) }
       background { visit shopping_cart.cart_path(ShoppingCart::Cart.last) }
 
       scenario 'removes product from Cart view' do

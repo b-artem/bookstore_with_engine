@@ -7,7 +7,7 @@ shared_examples 'item view' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
+    allow_any_instance_of(Book).to receive(:cover_image)
       .and_return("https://example.com/image.jpg")
   end
 

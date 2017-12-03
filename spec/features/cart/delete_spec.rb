@@ -6,13 +6,14 @@ shared_examples 'delete' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
+    allow_any_instance_of(Book).to receive(:cover_image)
       .and_return("https://example.com/image.jpg")
     visit home_index_path
   end
 
   context "user clicks 'x' button", js: true do
-    let!(:line_item) { create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book) }
+    let!(:line_item) { create(:shopping_cart_line_item,
+                         cart: ShoppingCart::Cart.last, product: book) }
     background { visit shopping_cart.cart_path(ShoppingCart::Cart.last) }
 
     scenario 'removes product from Cart view' do

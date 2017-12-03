@@ -9,7 +9,8 @@ module ShoppingCart
     context 'when user wants to see Product details' do
       background do
         visit main_app.root_path
-        create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: product)
+        create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last,
+                                         product: product)
         visit shopping_cart.cart_path(ShoppingCart::Cart.last)
       end
 

@@ -7,8 +7,10 @@ module ShoppingCart
 
     let(:cart) { create :shopping_cart_cart }
     let(:coupon) { create :shopping_cart_coupon }
-    let(:valid_attributes) { attributes_for(:shopping_cart_cart).merge(coupon: { code: coupon.code }) }
-    let(:invalid_attributes) { attributes_for(:shopping_cart_cart).merge(coupon: { code: 'abbccdd' }) }
+    let(:valid_attributes) { attributes_for(:shopping_cart_cart)
+                              .merge(coupon: { code: coupon.code }) }
+    let(:invalid_attributes) { attributes_for(:shopping_cart_cart)
+                                .merge(coupon: { code: 'abbccdd' }) }
     let(:valid_session) { { cart_id: cart.id } }
 
     describe 'GET #show' do

@@ -59,7 +59,8 @@ module ShoppingCart
     end
 
     describe 'POST #create' do
-      let!(:cart) { create(:shopping_cart_cart, line_items: [create(:shopping_cart_line_item)]) }
+      let!(:cart) { create(:shopping_cart_cart, line_items:
+                      [create(:shopping_cart_line_item)]) }
       let(:valid_session) { { cart_id: cart.id } }
 
       context 'when user is a guest' do

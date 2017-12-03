@@ -6,13 +6,14 @@ shared_examples 'changes quantity' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
+    allow_any_instance_of(Book).to receive(:cover_image)
       .and_return("https://example.com/image.jpg")
     visit home_index_path
   end
 
   context 'when product quantity = 1', js: true do
-    let(:line_item) { create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book) }
+    let(:line_item) { create(:shopping_cart_line_item,
+                               cart: ShoppingCart::Cart.last, product: book) }
     background { visit shopping_cart.cart_path(line_item.cart) }
 
     context "user clicks '+' button" do
@@ -54,7 +55,8 @@ shared_examples 'changes quantity' do
 
   context 'when product quantity = 2', js: true do
     let!(:line_item) do
-      create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book, quantity: 2)
+      create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last,
+                                       product: book, quantity: 2)
     end
     background { visit shopping_cart.cart_path(ShoppingCart::Cart.last) }
 

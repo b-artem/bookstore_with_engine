@@ -10,7 +10,7 @@ FactoryBot.define do
 
   factory :book_with_images, parent: :book do
     after :create do |book|
-      book.images = [Image.find_or_create_by(image_url: "https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")]
+      book.images = [Image.find_or_create_by(image_url: 'https://example.com/image.jpg')]
     end
   end
 
