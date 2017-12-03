@@ -15,7 +15,7 @@ class User < ApplicationRecord
       if auth.info.email
         user.email = auth.info.email
       else
-        user.email = user.info.first_name + user.info.last_name + '@fb.com'
+        user.email = auth.info.first_name + auth.info.last_name + '@fb.com'
       end
       skip_confirmation!
       user.password = Devise.friendly_token[0, 20]
