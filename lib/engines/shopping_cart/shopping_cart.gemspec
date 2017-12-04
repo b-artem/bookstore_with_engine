@@ -18,12 +18,15 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'aasm', '~> 4.12', '>= 4.12.3'
+  s.add_dependency 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
   s.add_dependency 'cancancan', '~> 2.1', '>= 2.1.1'
   s.add_dependency 'coffee-rails', '~> 4.2', '>= 4.2.2'
   s.add_dependency 'country_select', '~> 3.1'
   s.add_dependency 'devise', '~> 4.3'
   s.add_dependency 'draper', '~> 3.0', '>= 3.0.1'
+  s.add_dependency 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
   s.add_dependency 'haml-rails', '~> 1.0'
+  s.add_dependency 'jquery-rails', '~> 4.3', '>= 4.3.1'
   s.add_dependency 'rails', '~> 5.1'
   s.add_dependency 'rectify', '~> 0.10.0'
   s.add_dependency 'sass-rails', '~> 5.0'
