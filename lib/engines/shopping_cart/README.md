@@ -39,7 +39,7 @@ to show notifications. For example, in your application layout:
 %p#alert= alert
 ```
 
-6. Copy this line to the head section your layouts/application.html.haml:
+6. Copy this line to the head section your application laoput:
 ```ruby
 = yield :head
 ```
