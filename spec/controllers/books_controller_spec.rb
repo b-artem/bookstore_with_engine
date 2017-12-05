@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/devise'
 
 RSpec.describe BooksController, type: :controller do

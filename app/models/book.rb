@@ -1,11 +1,9 @@
 class Book < ApplicationRecord
+  include ShoppingCart::Concerns::Models::Product
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :categories
   has_many :images, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_many :line_items
-
-  before_destroy :ensure_not_referenced_by_any_line_item
 
   validates :title, :description, :price, :publication_year,
             :dimensions, :materials, presence: true
@@ -17,27 +15,26 @@ class Book < ApplicationRecord
 
   scope :best_seller, ->(category) do
     return Book.none unless Category.pluck(:name).include?(category)
-    return Category.find_by(name: category).books.first unless LineItem.exists?
-    LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
-      .joins(book: :categories).where(categories: { name: category })
-      .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.book_id').order('total_quantity DESC').first.book
+    return Category.find_by(name: category).books.first unless ShoppingCart::LineItem.exists?
+    ShoppingCart::LineItem.select("shopping_cart_line_items.product_id, sum(quantity) as total_quantity")
+      .joins(product: :categories).where(categories: { name: category })
+      .joins(:order).where(shopping_cart_orders: { state: 'delivered' })
+      .group('shopping_cart_line_items.product_id').order('total_quantity DESC').first.product
   end
 
   scope :popular_first_ids, -> do
-    return Book.none unless LineItem.exists?
-    LineItem.select("line_items.book_id, sum(quantity) as total_quantity")
-      .joins(:book)
-      .joins(:order).where(orders: { state: 'delivered' })
-      .group('line_items.book_id').order('total_quantity DESC').map(&:book_id)
+    return Book.none unless ShoppingCart::LineItem.exists?
+    ShoppingCart::LineItem.select("shopping_cart_line_items.product_id, sum(quantity) as total_quantity")
+      .joins(:product)
+      .joins(:order).where(shopping_cart_orders: { state: 'delivered' })
+      .group('shopping_cart_line_items.product_id').order('total_quantity DESC').map(&:product_id)
   end
 
-  private
+  def cover_image
+    images[0].image_url.file.url
+  end
 
-    def ensure_not_referenced_by_any_line_item
-      if line_items.exists?
-        errors.add(:base, I18n.t('models.book.referenced_by_line_items'))
-        throw :abort
-      end
-    end
+  def short_description
+    description.truncate(500)
+  end
 end

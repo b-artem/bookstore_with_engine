@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 RSpec.describe User, type: :model do
   let(:user) { build :user }

@@ -1,7 +1,7 @@
 .row
   .col-sm-5
     .general-img-wrap
-      = image_tag latest_book.images[0].image_url.file.url,
+      = image_tag latest_book.cover_image,
                   class: 'img-shadow general-thumbnail-img', alt: "design-book"
   .col-sm-7
     .mb-60
@@ -10,5 +10,5 @@
       %p.lead.small= latest_book.decorate.authors_names
       .general-align
         = button_to t('.buy_now'),
-                    line_items_path(book_id: latest_book.id, quantity: 1),
+                    shopping_cart.line_items_path(product_id: latest_book.id, quantity: 1),
                     class: 'btn btn-primary'

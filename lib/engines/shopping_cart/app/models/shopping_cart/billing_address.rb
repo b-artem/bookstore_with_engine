@@ -1,2 +1,4 @@
-class BillingAddress < Address
+module ShoppingCart
+  class BillingAddress < Address
+  end
 end

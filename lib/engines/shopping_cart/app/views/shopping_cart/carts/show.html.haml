@@ -1,7 +1,7 @@
 %h1.general-title-margin= t '.cart'
 
 .visible-xs
-  = render partial: 'line_items/form_visible_xs',
+  = render partial: 'shopping_cart/line_items/form_visible_xs',
                     collection: @cart.line_items, as: :line_item
 
 .hidden-xs
@@ -17,7 +17,7 @@
       %th.col-total
         %span.in-grey-600= t '.sub_total'
       %th.col-close
-    = render partial: 'line_items/form_hidden_xs',
+    = render partial: 'shopping_cart/line_items/form_hidden_xs',
                       collection: @cart.line_items, as: :line_item
 
 .general-order-wrap
@@ -25,7 +25,7 @@
     .col-sm-4
       .input-group.general-input-group
         = simple_form_for @cart do |f|
-          = f.simple_fields_for Coupon.new do |coupon|
+          = f.simple_fields_for ShoppingCart::Coupon.new do |coupon|
             = coupon.input :code,
               label: t('.enter_coupon'),
               placeholder: t('.enter_coupon'),

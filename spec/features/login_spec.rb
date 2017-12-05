@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/i18n'
 
 feature 'Login' do
@@ -7,8 +7,8 @@ feature 'Login' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive(:cover_image)
+      .and_return('https://example.com/image.jpg')
     visit new_user_session_path
   end
 

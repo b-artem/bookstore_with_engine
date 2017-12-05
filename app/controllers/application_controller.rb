@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
-  include CurrentCart
+  include ShoppingCart::Concerns::Controllers::ApplicationController
   protect_from_forgery with: :exception
   before_action :set_locale_from_params
   before_action :store_user_location, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_cart
   before_action :load_categories
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -42,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_ability
-    @current_ability ||= Ability.new(current_user, session)
+    @current_ability ||= Ability.new(current_user)
   end
 
   def load_categories
