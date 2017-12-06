@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :review do
     sequence :title { |n| "Review no. #{n}" }
     text { Faker::Lorem.paragraph }

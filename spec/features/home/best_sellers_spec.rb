@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/devise'
 
 shared_examples 'best sellers' do
@@ -9,16 +9,16 @@ shared_examples 'best sellers' do
   let(:bestseller_web_dev) { create :book_web_development }
 
   background do
-    create(:order, state: 'delivered', line_items: [
-            create(:line_item, book: bestseller_mob_dev),
-            create(:line_item, book: bestseller_photo),
-            create(:line_item, book: bestseller_web_design),
-            create(:line_item, book: bestseller_web_dev) ])
+    create(:shopping_cart_order, state: 'delivered', line_items: [
+            create(:shopping_cart_line_item, product: bestseller_mob_dev),
+            create(:shopping_cart_line_item, product: bestseller_photo),
+            create(:shopping_cart_line_item, product: bestseller_web_design),
+            create(:shopping_cart_line_item, product: bestseller_web_dev) ])
     create_list(:book_mobile_development, 3)
     create_list(:book_photo, 3)
     create_list(:book_web_design, 3)
     create_list(:book_web_development, 3)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
+    allow_any_instance_of(Book).to receive(:cover_image)
       .and_return("https://example.com/image.jpg")
     visit home_index_path
   end
@@ -49,7 +49,7 @@ shared_examples 'best sellers' do
         click_link("add-book-#{bestseller_photo.id}-to-cart")
       end
       wait_for_ajax
-      expect(Cart.last.line_items.first.book).to eq bestseller_photo
+      expect(ShoppingCart::Cart.last.line_items.first.product).to eq bestseller_photo
     end
   end
 end

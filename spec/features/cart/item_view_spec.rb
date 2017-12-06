@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/devise'
 require 'support/i18n'
 
@@ -7,7 +7,7 @@ shared_examples 'item view' do
   let(:book) { create :book }
   background do
     allow(Book).to receive(:best_seller).and_return(book)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
+    allow_any_instance_of(Book).to receive(:cover_image)
       .and_return("https://example.com/image.jpg")
   end
 
@@ -15,17 +15,17 @@ shared_examples 'item view' do
     background { visit home_index_path }
     scenario 'Cart page opens' do
       click_link 'cart'
-      expect(page).to have_text(t('carts.show.cart'))
-      expect(page).to have_text(t('carts.show.enter_coupon'))
-      expect(page).to have_button(t('carts.show.checkout'))
+      expect(page).to have_text(t('shopping_cart.carts.show.cart'))
+      expect(page).to have_text(t('shopping_cart.carts.show.enter_coupon'))
+      expect(page).to have_button(t('shopping_cart.carts.show.checkout'))
     end
   end
 
   context 'when user wants to see Book details' do
     background do
       visit home_index_path
-      create(:line_item, cart: Cart.last, book: book )
-      visit cart_path(Cart.last)
+      create(:shopping_cart_line_item, cart: ShoppingCart::Cart.last, product: book )
+      visit shopping_cart.cart_path(ShoppingCart::Cart.last)
     end
 
     context 'user clicks Photo' do

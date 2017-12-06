@@ -1,18 +1,20 @@
+require_dependency "shopping_cart/application_controller"
+
 module ShoppingCart
   class LineItemsController < ApplicationController
-    load_and_authorize_resource only: [:update, :destroy]
+    load_and_authorize_resource only: %i[update destroy]
     authorize_resource only: :create
 
     def create
-      book = Book.find(params[:book_id])
-      @line_item = @cart.add_product(book, params[:quantity])
+      product = ShoppingCart.product_class.find(params[:product_id])
+      @line_item = @cart.add_product(product, params[:quantity])
       if @line_item.save
-        redirect_back fallback_location: root_path, notice: t('.success')
+        redirect_back fallback_location: main_app.root_path, notice: t('.success')
       else
-        redirect_back fallback_location: root_path, alert: t('.fail')
+        redirect_back fallback_location: main_app.root_path, alert: t('.fail')
       end
     rescue
-      redirect_back fallback_location: root_path,
+      redirect_back fallback_location: main_app.root_path,
                     alert: t('.enter_positive_integer')
     end
 

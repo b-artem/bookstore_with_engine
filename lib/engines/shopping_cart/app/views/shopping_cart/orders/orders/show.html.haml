@@ -3,11 +3,13 @@
   .col-sm-4
     %h3.general-subtitle
       = t 'orders.checkout.address.shipping_address'
-    = render partial: 'orders/checkout/address', object: @order.shipping_address
+    = render partial: 'shopping_cart/orders/checkout/address',
+      object: @order.shipping_address
   .col-sm-4
     %h3.general-subtitle
       = t 'orders.checkout.address.billing_address'
-    = render partial: 'orders/checkout/address', object: @order.billing_address
+    = render partial: 'shopping_cart/orders/checkout/address',
+      object: @order.billing_address
   .col-sm-4
     %h3.general-subtitle
       = t '.shipments'
@@ -19,7 +21,8 @@
       = @order.shipping_method.decorate.price
       %br
 
-= render partial: 'orders/checkout/line_items', object: @order.line_items
+= render partial: 'shopping_cart/orders/checkout/line_items',
+  object: @order.line_items
 
 .text-center.general-text-right
   = render 'summary'

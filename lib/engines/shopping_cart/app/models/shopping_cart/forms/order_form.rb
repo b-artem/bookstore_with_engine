@@ -1,8 +1,10 @@
+require 'rectify'
+
 module ShoppingCart
   module Forms
     class OrderForm < Rectify::Form
-      attribute :billing_address, Forms::BillingAddressForm
-      attribute :shipping_address, Forms::ShippingAddressForm
+      attribute :billing_address, BillingAddressForm
+      attribute :shipping_address, ShippingAddressForm
       attribute :use_billing_address_as_shipping, Boolean
 
       validates :billing_address, presence: true

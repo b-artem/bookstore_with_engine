@@ -1,0 +1,132 @@
+en:
+  number:
+    currency:
+      format:
+        unit:      "€"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format:    "%u%n"
+  shopping_cart:
+    application:
+      translation_not_available: "%{locale} translation not available"
+    carts:
+      show:
+        cart: 'Cart'
+        order_summary: 'Order Summary'
+        coupon: 'Coupon:'
+        product: 'Product'
+        price: 'Price'
+        quantity: 'Quantity'
+        sub_total: 'SubTotal'
+        subtotal: 'Subtotal:'
+        order_total: 'Order Total:'
+        update_cart: 'Update cart'
+        checkout: 'Checkout'
+        enter_coupon: 'Enter Your Coupon Code'
+      update:
+        success: 'Coupon was successfully applied'
+        fail: "There is no such coupon or it's not valid anymore"
+      invalid_cart:
+        access_ivalid_cart: "Attempt to access invalid cart %{cart_id}"
+        invalid_cart: 'Invalid cart'
+    line_items:
+      create:
+        success: 'Line item was successfully added to a cart'
+        fail: 'Line item was not created'
+        enter_positive_integer: 'Line item was not added. Please enter positive integer quantity'
+      destroy:
+        success: 'Product was successfully removed'
+    orders:
+      orders:
+        index:
+          my_orders: 'My Orders'
+          filter_by: 'Filter by'
+          not_completed: 'not completed'
+        filter:
+          in_queue: 'Waiting for processing'
+          in_delivery: 'In delivery'
+          delivered: 'Delivered'
+          canceled: 'Canceled'
+        order:
+          number: 'Number'
+          completed_at: 'Completed at'
+          status: ' Status'
+          total: 'Total'
+        destroy:
+          success: 'Order was successfully destroyed'
+      checkout:
+        steps:
+          checkout: 'Checkout'
+          address: 'Address'
+          delivery: 'Delivery'
+          payment: 'Payment'
+          confirm: 'Confirm'
+          complete: 'Complete'
+        address:
+          billing_address: 'Billing Address'
+          shipping_address: 'Shipping Address'
+          all_fields_are_required: 'all fields are required'
+          use_billing_address: 'Use Billing Address'
+        delivery:
+          shipping_method: 'Shipping Method'
+          method: 'Method'
+          days: 'Days'
+          term: "%{days_min} to %{days_max} days"
+          price: 'Price'
+        payment:
+          credit_card: 'Credit Card'
+          card_number: 'Card Number'
+          name_on_card: 'Name on Card'
+          valid_until: 'MM/YY'
+          cvv: 'CVV'
+        confirm:
+          edit: 'edit'
+          shipments: 'Shipments'
+          payment_information: 'Payment Information'
+          place_order: 'Place Order'
+        complete:
+          thank_you_for_your_order: 'Thank You for your Order!'
+          order_confirmation_has_been_sent: 'An order confirmation has been sent to'
+          order: 'Order'
+          back_to_store: 'Back to Store'
+        order_summary:
+          order_summary: 'Order Summary'
+          subtotal: 'Subtotal'
+          coupon: 'Coupon'
+          shipping: 'Shipping'
+          order_total: 'Order Total:'
+        save_and_continue: 'Save and Continue'
+        line_item:
+          product: 'Product'
+          price: 'Price'
+          quantity: 'Quantity'
+          total: 'Total'
+          sub_total: 'SubTotal'
+    models:
+      address:
+        invalid_type: "%{value} is not a valid type"
+      coupon:
+        coupon_symbols: 'Only allows letters and numbers'
+      payment:
+        invalid_term: 'Invalid term'
+      product:
+        referenced_by_line_items: 'You can not delete this product because it is referenced by line items'
+      forms:
+        address_form:
+          only_letters: 'Only allows letters'
+          address_symbols: "Only allows a-z, A-Z, 0-9,’,’, ‘-’, ‘ ’"
+          city_symbols: "Only allows a-z, ' ', A-Z"
+          zip_symbols: "Only allows 0-9 '-'"
+          phone_symbols: "Only allows '+', 0-9"
+        payment_form:
+          card_number_symbols: 'Only allows 0-9'
+          name_on_card_symbols: 'Only allows letters and spaces'
+          cvv_symbols: 'Only allows 0-9'
+    cart_is_empty: 'Your cart is empty'
+    order_was_not_found: "Order %{order_id} was not found"
+  time:
+    formats:
+      date_long: "%B %e, %Y"
+      date_short: "%Y-%m-%d"
+      date_slashes: "%d/%m/%y"

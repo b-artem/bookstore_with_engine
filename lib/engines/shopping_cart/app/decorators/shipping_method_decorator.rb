@@ -3,7 +3,8 @@ module ShoppingCart
     delegate_all
 
     def terms
-      I18n.t('orders.checkout.delivery.term', days_min: days_min, days_max: days_max)
+      I18n.t('shopping_cart.orders.checkout.delivery.term',
+             days_min: days_min, days_max: days_max)
     end
 
     def price

@@ -1,11 +1,13 @@
+require_dependency "shopping_cart/application_controller"
+
 module ShoppingCart
   class Orders::CheckoutController < ApplicationController
     include Wicked::Wizard
-    include CurrentOrder
+    include Concerns::Controllers::CurrentOrder
 
-    before_action :authenticate_user!
-    authorize_resource(Order)
-    authorize_resource(Address)
+    before_action :authenticate_main_app_user!
+    authorize_resource class: 'ShoppingCart::Order'
+    authorize_resource class: 'ShoppingCart::Address'
     steps :address, :delivery, :payment, :confirm, :complete
 
     def show
@@ -39,8 +41,8 @@ module ShoppingCart
 
       def load_addresses
         @order = Forms::OrderForm.from_model(current_order)
-        billing_model = current_order.billing_address || current_user.billing_address
-        shipping_model = current_order.shipping_address || current_user.shipping_address
+        billing_model = current_order.billing_address || current_main_app_user.billing_address
+        shipping_model = current_order.shipping_address || current_main_app_user.shipping_address
         @order.billing_address = Forms::BillingAddressForm.from_model(billing_model)
         @order.shipping_address = Forms::ShippingAddressForm.from_model(shipping_model)
       end

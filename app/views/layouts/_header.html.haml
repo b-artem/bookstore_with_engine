@@ -8,10 +8,10 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand= t '.bookstore'
-      = link_to @cart, class: 'shop-link pull-right visible-xs' do
+      = link_to shopping_cart.cart_path(@cart), class: 'shop-link pull-right visible-xs' do
         %span.shop-icon
           %span#cart-xs.shop-quantity= @cart.products_quantity
-    = link_to @cart, class: 'shop-link pull-right hidden-xs', id: 'cart' do
+    = link_to shopping_cart.cart_path(@cart), class: 'shop-link pull-right hidden-xs', id: 'cart' do
       %span.shop-icon
         %span#cart.shop-quantity= @cart.products_quantity
     #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
@@ -21,24 +21,24 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            = link_to t('layouts.application.home'), root_path
+            = link_to t('layouts.application.home'), main_app.root_path
           %li
             %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t 'application.header.shop'
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               - @categories.each do |category|
                 %li= link_to t("books.categories.#{category.name.downcase.tr(' ', '_')}"),
-                            books_path(category: category.name),
+                            main_app.books_path(category: category.name),
                             class: 'collapse-link'
           = render 'layouts/account_menu'
 
       .hidden-xs
         %ul.nav.navbar-nav
-          %li= link_to t('layouts.application.home'), root_path
+          %li= link_to t('layouts.application.home'), main_app.root_path
           %li.dropdown
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button",    'aria-haspopup': "true", 'aria-expanded': "false"}
               = t 'layouts.application.shop'
             %ul.dropdown-menu
               - @categories.each do |category|
                 %li= link_to t("books.categories.#{category.name.downcase.tr(' ', '_')}"),
-                              books_path(category: category.name)
+                              main_app.books_path(category: category.name)
           = render 'layouts/account_menu'
