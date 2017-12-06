@@ -1,2 +1,4 @@
-class ShippingAddress < Address
+module ShoppingCart
+  class ShippingAddress < Address
+  end
 end

@@ -1,15 +1,17 @@
-class CartDecorator < Draper::Decorator
-  delegate_all
+module ShoppingCart
+  class CartDecorator < Draper::Decorator
+    delegate_all
 
-  def subtotal
-    h.number_to_currency(object.subtotal)
-  end
+    def subtotal
+      h.number_to_currency(object.subtotal)
+    end
 
-  def total
-    h.number_to_currency(object.total)
-  end
+    def total
+      h.number_to_currency(object.total)
+    end
 
-  def discount
-    h.number_to_currency(object.total - object.subtotal)
+    def discount
+      h.number_to_currency(object.total - object.subtotal)
+    end
   end
 end

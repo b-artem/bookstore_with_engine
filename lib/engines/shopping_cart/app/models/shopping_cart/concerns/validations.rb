@@ -1,11 +1,14 @@
-module Validations
+module ShoppingCart
+  module Concerns
+    module Validations
+      private
 
-  private
-
-    def positive_integer?(string)
-      return false if Float(string) <= 0
-      true if ( Float(string) - Integer(string) ) == 0
-    rescue
-      false
+      def positive_integer?(string)
+        return false if Float(string) <= 0
+        true if ( Float(string) - Integer(string) ) == 0
+      rescue
+        false
+      end
     end
+  end
 end
