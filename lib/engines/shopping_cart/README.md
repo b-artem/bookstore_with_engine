@@ -2,20 +2,22 @@
 Adds shopping cart and checkout flow to your app.
 
 ## Usage
-1. Your app should have classes that represent users
+1. Engine expects you use devise gem for authentication, as it heavily uses
+`authenticate_user!` method.
+
+2. Your app should have classes that represent users
 and products. You can name these classes whatever you want, although you need to define
 user_class and product_class in `app/config/initializers/shopping_cart.rb`, e.g.:
 ```ruby
 ShoppingCart.product_class = 'Book'
 ShoppingCart.user_class = 'User'
 ```
-
-2. User have to respond to #email method.
+User have to respond to #email method.
 Product have to respond to #title, #price, #cover_image, and #short_description methods.
 
 3. Include the following line in your `application_controller.rb`:
 ```ruby
-include ShoppingCart::Concerns::Controllers::ApplicationController
+include ShoppingCart::Concerns::Controllers::CartSupport
 ```
 Include the following line in your user model, e.g. `user.rb`:
 ```ruby

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include ShoppingCart::Concerns::Controllers::ApplicationController
+  include ShoppingCart::Concerns::Controllers::CartSupport
   protect_from_forgery with: :exception
   before_action :set_locale_from_params
   before_action :store_user_location, if: :storable_location?

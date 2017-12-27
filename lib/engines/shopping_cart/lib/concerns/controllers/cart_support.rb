@@ -1,7 +1,7 @@
 module ShoppingCart
   module Concerns
     module Controllers
-      module ApplicationController
+      module CartSupport
         extend ActiveSupport::Concern
 
         included do

@@ -12,7 +12,7 @@ require 'sass-rails'
 require 'simple_form'
 require 'turbolinks'
 require 'wicked'
-require_relative '../concerns/controllers/application_controller'
+require_relative '../concerns/controllers/cart_support'
 require_relative '../concerns/models/user'
 require_relative '../concerns/models/product'
 

@@ -1,8 +1,5 @@
 module ShoppingCart
   class ApplicationController < ::ApplicationController
-    protect_from_forgery with: :exception
-    include Concerns::Controllers::ApplicationController
-
     def current_main_app_user
       public_send "current_#{ShoppingCart.user_class.to_s.downcase}"
     end
