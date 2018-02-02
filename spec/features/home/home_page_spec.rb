@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/devise'
 require 'support/i18n'
 
@@ -7,8 +7,8 @@ shared_examples 'home page' do
   background do
     create_list(:book, 5)
     allow(Book).to receive(:best_seller).and_return(Book.first)
-    allow_any_instance_of(Book).to receive_message_chain('images.[].image_url.file.url')
-      .and_return("https://example.com/image.jpg")
+    allow_any_instance_of(Book).to receive(:cover_image)
+      .and_return('https://example.com/image.jpg')
     visit home_index_path
   end
 

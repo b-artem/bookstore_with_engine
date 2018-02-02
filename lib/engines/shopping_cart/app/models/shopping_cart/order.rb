@@ -2,7 +2,7 @@ module ShoppingCart
   class Order < ApplicationRecord
     include AASM
 
-    belongs_to :user
+    belongs_to :user, class_name: ShoppingCart.user_class.to_s
     belongs_to :shipping_method, optional: true
     belongs_to :coupon, optional: true
     has_one :billing_address, dependent: :destroy

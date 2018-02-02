@@ -15,7 +15,7 @@ module ShoppingCart
     end
 
     def completed_at_short_date
-      return I18n.t('orders.orders.index.not_completed') unless object.completed_at
+      return I18n.t('shopping_cart.orders.orders.index.not_completed') unless object.completed_at
       I18n.l(object.completed_at, format: :date_short)
     end
 
@@ -24,7 +24,7 @@ module ShoppingCart
     end
 
     def state
-      I18n.t("orders.orders.filter.#{object.state}")
+      I18n.t("shopping_cart.orders.orders.filter.#{object.state}")
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 require 'support/devise'
-require 'support/factory_girl'
+require 'support/factory_bot'
 
 RSpec.describe ReviewsController, type: :controller do
   let(:user) { create :user }

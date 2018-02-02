@@ -3,11 +3,15 @@
     .row
       .col-sm-9
         %ul.list-inline.general-align.mb-25
-          %li= link_to t('layouts.application.home'), root_path, class: 'nav-link'
-          %li= link_to t('layouts.application.shop'), books_path, class: 'nav-link'
+          %li= link_to t('layouts.application.home'),
+            main_app.root_path, class: 'nav-link'
+          %li= link_to t('layouts.application.shop'),
+            main_app.books_path, class: 'nav-link'
           - if user_signed_in?
-            %li= link_to t('layouts.application.orders'), orders_path, class: 'nav-link'
-            %li= link_to t('layouts.application.settings'), settings_edit_path, class: 'nav-link'
+            %li= link_to t('layouts.application.orders'),
+              shopping_cart.orders_path, class: 'nav-link'
+            %li= link_to t('layouts.application.settings'),
+              main_app.settings_edit_path, class: 'nav-link'
       .col-sm-3
         %p.general-nav-mail= t '.support'
         %p.general-nav-number= t '.phone_number'

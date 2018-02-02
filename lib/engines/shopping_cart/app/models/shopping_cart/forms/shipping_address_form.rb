@@ -1,9 +1,9 @@
 module ShoppingCart
   module Forms
-    class Forms::ShippingAddressForm < Forms::AddressForm
+    class ShippingAddressForm < AddressForm
       def initialize(*args)
         super(*args)
-        @type = 'ShippingAddress'
+        @type = 'ShoppingCart::ShippingAddress'
       end
     end
   end

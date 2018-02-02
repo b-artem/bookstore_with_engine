@@ -1,12 +1,12 @@
 %tr{id: "line-item-#{line_item.id}"}
   %td
     .general-img-wrap-table
-      = link_to book_path(line_item.book), id: "photo-view-#{line_item.book.id}" do
-        = image_tag line_item.book.images[0].image_url.file.url,
-                    alt: "design-book", class: 'cart-img-shadow pull-left'
+      = link_to product_path(line_item.product), id: "photo-view-#{line_item.product.id}" do
+        = image_tag line_item.product.cover_image,
+                    alt: "design-product", class: 'cart-img-shadow pull-left'
   %td
-    = link_to book_path(line_item.book), class: 'mb-20', id: "title-view-#{line_item.book.id}" do
-      %p.title.in-gold-500= line_item.book.title
+    = link_to product_path(line_item.product), class: 'mb-20', id: "title-view-#{line_item.product.id}" do
+      %p.title.in-gold-500= line_item.product.title
   %td
     %span.font-16.in-gold-500= line_item.decorate.price
   %td

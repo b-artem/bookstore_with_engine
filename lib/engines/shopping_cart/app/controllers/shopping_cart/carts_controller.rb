@@ -1,3 +1,5 @@
+require_dependency "shopping_cart/application_controller"
+
 module ShoppingCart
   class CartsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart

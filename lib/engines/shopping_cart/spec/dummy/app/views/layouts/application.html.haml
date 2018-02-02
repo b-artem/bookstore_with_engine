@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+%html
+  %head
+    = csrf_meta_tags
+
+    = yield :head
+
+  %body
+    %h1 Application layout
+
+    - if flash.any?
+      %p#notice= notice
+      %p#alert= alert
+
+    = yield

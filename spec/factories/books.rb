@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :book do
     sequence :title { |n| "Title #{n}" }
     sequence :description { |n| "Description of Book #{n}. " * 35 }
@@ -10,7 +10,7 @@ FactoryGirl.define do
 
   factory :book_with_images, parent: :book do
     after :create do |book|
-      book.images = [Image.find_or_create_by(image_url: "https://images-na.ssl-images-amazon.com/images/I/517JAFQLpdL.jpg")]
+      book.images = [Image.find_or_create_by(image_url: 'https://example.com/image.jpg')]
     end
   end
 

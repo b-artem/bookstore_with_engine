@@ -1,4 +1,4 @@
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/i18n'
 
 describe 'devise/sessions/new.html.haml', type: :view do

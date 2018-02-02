@@ -3,7 +3,7 @@ User.create!([
   {email: "user@user.ua", password: "password", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2017-12-01 14:31:52", last_sign_in_at: "2017-12-01 14:31:52", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", role: "user", omniauth_provider: nil, omniauth_uid: nil, image_url: nil, confirmation_token: "_Cq3j1qFN_v4KjwpUjvS", confirmed_at: "2017-12-01 14:32:06", confirmation_sent_at: "2017-12-01 14:31:50", unconfirmed_email: nil}
 ])
 
-ShippingMethod.create!([
+ShoppingCart::ShippingMethod.create!([
   {name: "Delivery Next Day!", days_min: 3, days_max: 7, price: 5.0},
   {name: "Pick Up In-Store", days_min: 5, days_max: 20, price: 10.0},
   {name: "Expressit", days_min: 2, days_max: 3, price: 15.0}
@@ -16,7 +16,7 @@ Category.create!([
   {name: "Web development"}
 ])
 
-Coupon.create!([
+ShoppingCart::Coupon.create!([
   {code: "12345678", discount: "20.0", valid_until: "2017-12-31"}
 ])
 
@@ -93,39 +93,39 @@ Author.find(12).books << Book.find(13)
 Author.find(13).books << Book.find(15)
 Author.find(14).books << Book.find(14)
 
-IMAGES_PATH = File.expand_path('../books_for_bookstore/', Rails.root)
-Image.create!([
-  {book_id: 11, image_url: open(IMAGES_PATH + "/Agile1.jpg")},
-  {book_id: 11, image_url: open(IMAGES_PATH + "/Agile2.jpg")},
-  {book_id: 11, image_url: open(IMAGES_PATH + "/Agile3.jpg")},
-  {book_id: 11, image_url: open(IMAGES_PATH + "/Agile4.jpg")},
-  {book_id: 14, image_url: open(IMAGES_PATH + "/Faded.jpg")},
-  {book_id: 15, image_url: open(IMAGES_PATH + "/Photos_changed.jpg")},
-  {book_id: 13, image_url: open(IMAGES_PATH + "/Photo_ark.jpg")},
-  {book_id: 12, image_url: open(IMAGES_PATH + "/Rails_Angular.jpg")},
-  {book_id: 10, image_url: open(IMAGES_PATH + "/html_css.jpg")},
-  {book_id: 9, image_url: open(IMAGES_PATH + "/web_design_html.jpg")},
-  {book_id: 7, image_url: open(IMAGES_PATH + "/Android_programming.jpg")},
-  {book_id: 6, image_url: open(IMAGES_PATH + "/Building_ecom.jpg")},
-  {book_id: 5, image_url: open(IMAGES_PATH + "/Learning_java.jpg")},
-  {book_id: 4, image_url: open(IMAGES_PATH + "/Learning_mobile_app.jpg")},
-  {book_id: 3, image_url: open(IMAGES_PATH + "/Xamarin.jpg")},
-  {book_id: 2, image_url: open(IMAGES_PATH + "/Mobile_app_dev.jpg")},
-  {book_id: 1, image_url: open(IMAGES_PATH + "/Hello_Android.jpg")},
-  {book_id: 8, image_url: open(IMAGES_PATH + "/javascript_jquery.jpg")}
-])
+# IMAGES_PATH = File.expand_path('../books_for_bookstore/', Rails.root)
+# Image.create!([
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile1.jpg")},
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile2.jpg")},
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile3.jpg")},
+#   {book_id: 11, image_url: open(IMAGES_PATH + "/Agile4.jpg")},
+#   {book_id: 14, image_url: open(IMAGES_PATH + "/Faded.jpg")},
+#   {book_id: 15, image_url: open(IMAGES_PATH + "/Photos_changed.jpg")},
+#   {book_id: 13, image_url: open(IMAGES_PATH + "/Photo_ark.jpg")},
+#   {book_id: 12, image_url: open(IMAGES_PATH + "/Rails_Angular.jpg")},
+#   {book_id: 10, image_url: open(IMAGES_PATH + "/html_css.jpg")},
+#   {book_id: 9, image_url: open(IMAGES_PATH + "/web_design_html.jpg")},
+#   {book_id: 7, image_url: open(IMAGES_PATH + "/Android_programming.jpg")},
+#   {book_id: 6, image_url: open(IMAGES_PATH + "/Building_ecom.jpg")},
+#   {book_id: 5, image_url: open(IMAGES_PATH + "/Learning_java.jpg")},
+#   {book_id: 4, image_url: open(IMAGES_PATH + "/Learning_mobile_app.jpg")},
+#   {book_id: 3, image_url: open(IMAGES_PATH + "/Xamarin.jpg")},
+#   {book_id: 2, image_url: open(IMAGES_PATH + "/Mobile_app_dev.jpg")},
+#   {book_id: 1, image_url: open(IMAGES_PATH + "/Hello_Android.jpg")},
+#   {book_id: 8, image_url: open(IMAGES_PATH + "/javascript_jquery.jpg")}
+# ])
 
-Order.create!([
+ShoppingCart::Order.create!([
   {number: "R00000001", completed_at: "2017-09-24 08:03:00", state: "delivered", user_id: 2, shipping_method_id: 3, use_billing_address_as_shipping: true, coupon_id: nil},
   {number: "R00000002", completed_at: "2017-09-24 08:04:00", state: "delivered", user_id: 2, shipping_method_id: 2, use_billing_address_as_shipping: true, coupon_id: nil},
   {number: "R00000003", completed_at: nil, state: "canceled", user_id: 2, shipping_method_id: nil, use_billing_address_as_shipping: false, coupon_id: nil},
 ])
-#
-LineItem.create!([
-  {book_id: 11, cart_id: nil, quantity: 45, order_id: 1, price: "57.95"},
-  {book_id: 9, cart_id: nil, quantity: 40, order_id: 1, price: "47.15"},
-  {book_id: 7, cart_id: nil, quantity: 35, order_id: 1, price: "49.99"},
-  {book_id: 15, cart_id: nil, quantity: 50, order_id: 2, price: "49.99"},
+
+ShoppingCart::LineItem.create!([
+  {product_id: 11, cart_id: nil, quantity: 45, order_id: 1, price: "57.95"},
+  {product_id: 9, cart_id: nil, quantity: 40, order_id: 1, price: "47.15"},
+  {product_id: 7, cart_id: nil, quantity: 35, order_id: 1, price: "49.99"},
+  {product_id: 15, cart_id: nil, quantity: 50, order_id: 2, price: "49.99"},
 ])
 
 Review.create!([
@@ -135,13 +135,13 @@ Review.create!([
   {title: "Nice book", text: "Very nice book", score: 5, status: "unprocessed", book_id: 11, user_id: 2},
 ])
 
-Address.create!([
-  {type: "ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: nil},
-  {type: "BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: nil},
-  {type: "ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: 1},
-  {type: "BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: 1},
-  {type: "ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: 2},
-  {type: "BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: 2},
-  {type: "ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: 3},
-  {type: "BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: 3}
+ShoppingCart::Address.create!([
+  {type: "ShoppingCart::ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: nil},
+  {type: "ShoppingCart::BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: nil},
+  {type: "ShoppingCart::ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: 1},
+  {type: "ShoppingCart::BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: 1},
+  {type: "ShoppingCart::ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: 2},
+  {type: "ShoppingCart::BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: 2},
+  {type: "ShoppingCart::ShippingAddress", first_name: "Elon", last_name: "Musk", address: "Yavornitskogo avenue", city: "Dnipro", zip: "49000", country: "UA", phone: "+3564748974", user_id: 2, order_id: 3},
+  {type: "ShoppingCart::BillingAddress", first_name: "Elon", last_name: "Musk", address: "New York", city: "San Francisco", zip: "12345", country: "US", phone: "+33333333", user_id: 2, order_id: 3}
 ])

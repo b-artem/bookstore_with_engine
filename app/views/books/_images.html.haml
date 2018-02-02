@@ -1,6 +1,6 @@
 .mb-20
   - if images[0]
-    = image_tag images[0].image_url.file.url, class: 'img-responsive'
+    = image_tag @book.cover_image, class: 'img-responsive'
   - else
     %p= t '.no_images'
 .images.clearfix

@@ -2,7 +2,7 @@
 
 .text-center.mb-40
   %h3.general-subtitle= t '.thank_you_for_your_order'
-  %p.fw-300= "#{t('.order_confirmation_has_been_sent')} #{current_user.email}"
+  %p.fw-300= "#{t('.order_confirmation_has_been_sent')} #{@current_order.user.email}"
 .row.mb-20
   .col-sm-6
     .visible-xs
@@ -28,5 +28,5 @@
   = render 'order_summary'
 
 .text-center
-  = button_to t('.back_to_store'), books_path, method: :get,
+  = button_to t('.back_to_store'), products_path, method: :get,
               class: 'btn btn-default mb-20'
