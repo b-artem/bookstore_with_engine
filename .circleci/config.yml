@@ -1,0 +1,104 @@
+version: 2
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    # parallelism: 2
+    working_directory: ~/bookstore_with_engine
+    docker:
+      - image: circleci/ruby:2.4.1-node-browsers
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: localhost
+          PGUSER: bookstore_with_engine
+          RAILS_ENV: test
+          RAKE_ENV: test # if rake is used
+      - image: circleci/postgres:9.5
+        environment:
+          POSTGRES_USER: bookstore_with_engine
+          POSTGRES_DB: bookstore_with_engine_test
+          POSTGRES_PASSWORD: ""
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+
+      # Needed for building gem capybara-webkit
+      # - restore_cache:
+      #     keys:
+      #       - bookstore-with-engine-webkit-v2-{{ checksum "Gemfile.lock" }}
+      #       - bookstore-with-engine-webkit-v2-
+      - run:
+          name: Install WebKit from QT
+          command: sudo apt-get update && sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+      # - save_cache:
+      #     key: bookstore-webkit-v2-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - ????????????
+
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - bookstore-with-engine-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - bookstore-with-engine-bundle-v2-
+      - run:
+          name: Bundle install
+          command: bundle check || bundle install
+      # Store bundle cache
+      - save_cache:
+          key: bookstore-with-engine-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      # Only necessary if app uses webpacker or yarn in some other way
+      # - restore_cache:
+      #     keys:
+      #       - rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #       - rails-demo-yarn-
+      # - run:
+      #     name: Yarn Install
+      #     command: yarn install --cache-folder ~/.cache/yarn
+      # Store yarn / webpacker cache
+      # - save_cache:
+      #     key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - ~/.cache/yarn
+
+      # If databse.yml is in .gitignore
+      # - run:
+      #     name: Prepare DB configuration file
+      #     command: |
+      #       mkdir -p config && echo 'test:
+      #         adapter: postgresql
+      #         encoding: unicode
+      #         pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+      #         username: bookstore_with_engine
+      #         database: bookstore_with_engine_test
+      #         host: localhost
+      #       ' > config/database.yml
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      - run:
+          name: Run RSpec
+          command: bundle exec rspec
+
+      # - run:
+          # name: Run rspec in parallel
+          # command: |
+          #   bundle exec rspec --profile 10 \
+          #                     --format RspecJunitFormatter \
+          #                     --out test_results/rspec.xml \
+          #                     --format progress \
+          #                     $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
